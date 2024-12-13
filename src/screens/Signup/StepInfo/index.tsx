@@ -12,6 +12,8 @@ import {ScreenTransition} from '#/screens/Login/ScreenTransition'
 import {is13, is18, useSignupContext} from '#/screens/Signup/state'
 import {Policies} from '#/screens/Signup/StepInfo/Policies'
 import {atoms as a} from '#/alf'
+import {Button, ButtonText} from '#/components/Button'
+import {Divider} from '#/components/Divider'
 import * as DateField from '#/components/forms/DateField'
 import {FormError} from '#/components/forms/FormError'
 import {HostingProvider} from '#/components/forms/HostingProvider'
@@ -20,6 +22,7 @@ import {Envelope_Stroke2_Corner0_Rounded as Envelope} from '#/components/icons/E
 import {Lock_Stroke2_Corner0_Rounded as Lock} from '#/components/icons/Lock'
 import {Ticket_Stroke2_Corner0_Rounded as Ticket} from '#/components/icons/Ticket'
 import {Loader} from '#/components/Loader'
+import {Text} from '#/components/Typography'
 import {BackNextButtons} from '../BackNextButtons'
 
 function sanitizeDate(date: Date): Date {
@@ -123,6 +126,10 @@ export function StepInfo({
       activeStep: state.activeStep,
     })
   }
+
+  const onPressASMLSignup = React.useCallback(() => {
+    window.open('https://asml-issuer.vercel.app/', '_blank')
+  }, [])
 
   return (
     <ScreenTransition>
@@ -230,6 +237,37 @@ export function StepInfo({
             />
           </>
         ) : undefined}
+        <View style={[a.mt_3xl]}>
+          <View style={[a.flex_row, a.align_center, a.gap_md]}>
+            <Divider style={[a.flex_1]} />
+            <Text style={[a.text_contrast_medium]}>
+              <Trans>or</Trans>
+            </Text>
+            <Divider style={[a.flex_1]} />
+          </View>
+
+          <View style={[a.mt_xl]}>
+            <Text style={[a.text_center, a.text_contrast_medium, a.mb_lg]}>
+              <Trans>Get verified with ASML</Trans>
+            </Text>
+            <Button
+              variant="solid"
+              color="secondary"
+              size="large"
+              onPress={onPressASMLSignup}
+              style={[
+                a.flex_row,
+                a.justify_center,
+                a.align_center,
+                a.gap_md,
+                {backgroundColor: '#000000'},
+              ]}>
+              <ButtonText style={{color: '#FFFFFF'}}>
+                <Trans>Continue with ASML</Trans>
+              </ButtonText>
+            </Button>
+          </View>
+        </View>
       </View>
       <BackNextButtons
         hideNext={!is13(state.dateOfBirth)}

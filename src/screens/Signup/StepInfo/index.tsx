@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect,useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
@@ -13,8 +13,8 @@ import {logger} from '#/logger'
 import {ScreenTransition} from '#/screens/Login/ScreenTransition'
 import {is13, is18, useSignupContext} from '#/screens/Signup/state'
 import {Policies} from '#/screens/Signup/StepInfo/Policies'
-import {atoms as a} from '#/alf'
-import {Button, ButtonIcon,ButtonText} from '#/components/Button'
+import {atoms as a, useTheme} from '#/alf'
+import {Button, ButtonIcon, ButtonText} from '#/components/Button'
 import {Divider} from '#/components/Divider'
 import * as DateField from '#/components/forms/DateField'
 import {FormError} from '#/components/forms/FormError'
@@ -35,6 +35,11 @@ const CRED_DEF_ID =
   process.env.CRED_DEF_ID ||
   'LJWQmqq9sE8safrFQqQnUv:3:CL:2616193:ASML.phone_verification'
 const TINYURL_API = 'https://tinyurl.com/api-create.php?url='
+
+const ATTR_DISPLAY_NAMES: Record<string, string> = {
+  area_code: 'Area Code',
+  // Add more mappings as needed
+}
 
 function sanitizeDate(date: Date): Date {
   if (!date || date.toString() === 'Invalid Date') {
@@ -59,6 +64,7 @@ export function StepInfo({
 }) {
   const {_} = useLingui()
   const {state, dispatch} = useSignupContext()
+  const theme = useTheme()
 
   const inviteCodeValueRef = useRef<string>(state.inviteCode)
   const emailValueRef = useRef<string>(state.email)
@@ -72,6 +78,7 @@ export function StepInfo({
   const [presExId, setPresExId] = useState<string>('')
   const [verificationState, setVerificationState] = useState<string>('')
   const [revealedAttributes, setRevealedAttributes] = useState<any>(null)
+  const [verificationResponse, setVerificationResponse] = useState<any>(null)
 
   const tldtsRef = React.useRef<typeof tldts>()
   React.useEffect(() => {
@@ -229,6 +236,7 @@ export function StepInfo({
       )
       const state = response.data.state
       setVerificationState(state)
+      setVerificationResponse(response.data)
 
       // If verification is done, extract revealed attributes
       if (state === 'done') {
@@ -431,16 +439,46 @@ export function StepInfo({
                   </Text>
 
                   {verificationState === 'done' && revealedAttributes && (
-                    <View style={[a.mt_md]}>
-                      <Text style={[a.text_sm, a.font_bold, a.mb_xs]}>
-                        <Trans>Verified Attributes:</Trans>
+                    <View
+                      style={[
+                        a.mt_md,
+                        a.p_lg,
+                        a.rounded_lg,
+                        {
+                          backgroundColor: theme.palette.positive_25,
+                          borderWidth: 1,
+                          borderColor: theme.palette.positive_200,
+                        },
+                      ]}>
+                      <Text
+                        style={[
+                          a.text_lg,
+                          a.font_bold,
+                          a.text_center,
+                          a.mb_md,
+                          {color: theme.palette.positive_900},
+                        ]}>
+                        <Trans>Revealed Data</Trans>
                       </Text>
                       {Object.entries(revealedAttributes).map(
-                        ([key, value]: [string, any]) => (
-                          <Text key={key} style={[a.text_sm]}>
-                            {key}: {value.raw}
-                          </Text>
-                        ),
+                        ([key, value]: [string, any]) => {
+                          const attrName =
+                            verificationResponse?.by_format?.pres_request?.indy
+                              ?.requested_attributes?.[key]?.name || key
+                          const displayName =
+                            ATTR_DISPLAY_NAMES[attrName] || attrName
+                          return (
+                            <Text
+                              key={key}
+                              style={[
+                                a.text_md,
+                                a.text_center,
+                                {color: theme.palette.positive_800},
+                              ]}>
+                              {displayName}: {value.raw}
+                            </Text>
+                          )
+                        },
                       )}
                     </View>
                   )}

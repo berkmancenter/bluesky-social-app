@@ -1,8 +1,10 @@
-import React, {useRef} from 'react'
+import React, {useCallback, useEffect,useRef, useState} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import axios from 'axios'
 import * as EmailValidator from 'email-validator'
+import QRCode from 'react-qr-code'
 import type tldts from 'tldts'
 
 import {logEvent} from '#/lib/statsig/statsig'
@@ -12,7 +14,7 @@ import {ScreenTransition} from '#/screens/Login/ScreenTransition'
 import {is13, is18, useSignupContext} from '#/screens/Signup/state'
 import {Policies} from '#/screens/Signup/StepInfo/Policies'
 import {atoms as a} from '#/alf'
-import {Button, ButtonText} from '#/components/Button'
+import {Button, ButtonIcon,ButtonText} from '#/components/Button'
 import {Divider} from '#/components/Divider'
 import * as DateField from '#/components/forms/DateField'
 import {FormError} from '#/components/forms/FormError'
@@ -24,6 +26,15 @@ import {Ticket_Stroke2_Corner0_Rounded as Ticket} from '#/components/icons/Ticke
 import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 import {BackNextButtons} from '../BackNextButtons'
+
+const AGENT_URL = process.env.AGENT_URL || 'https://asml-acapy-bsky.ngrok.io'
+const SCHEMA_ID =
+  process.env.SCHEMA_ID ||
+  'LJWQmqq9sE8safrFQqQnUv:2:phone verification:77.81.71'
+const CRED_DEF_ID =
+  process.env.CRED_DEF_ID ||
+  'LJWQmqq9sE8safrFQqQnUv:3:CL:2616193:ASML.phone_verification'
+const TINYURL_API = 'https://tinyurl.com/api-create.php?url='
 
 function sanitizeDate(date: Date): Date {
   if (!date || date.toString() === 'Invalid Date') {
@@ -55,6 +66,12 @@ export function StepInfo({
   const passwordValueRef = useRef<string>(state.password)
 
   const [hasWarnedEmail, setHasWarnedEmail] = React.useState<boolean>(false)
+  const [qrUrl, setQrUrl] = React.useState<string>('')
+  const [showQR, setShowQR] = React.useState(false)
+  const [isGeneratingQR, setIsGeneratingQR] = React.useState(false)
+  const [presExId, setPresExId] = useState<string>('')
+  const [verificationState, setVerificationState] = useState<string>('')
+  const [revealedAttributes, setRevealedAttributes] = useState<any>(null)
 
   const tldtsRef = React.useRef<typeof tldts>()
   React.useEffect(() => {
@@ -66,6 +83,82 @@ export function StepInfo({
     // @ts-expect-error - valid path
     import('react-native-view-shot/src/index')
   }, [])
+
+  const createProofRequest = async () => {
+    try {
+      console.log(
+        'Making proof request to:',
+        `${AGENT_URL}/present-proof-2.0/create-request`,
+      )
+      const proofReq = await axios.post(
+        `${AGENT_URL}/present-proof-2.0/create-request`,
+        {
+          presentation_request: {
+            indy: {
+              name: 'Proof of Credential Existence',
+              version: '1.0',
+              nonce: '1234567890',
+              requested_attributes: {
+                '0_any_uuid': {
+                  name: 'area_code',
+                  restrictions: [
+                    {
+                      schema_id: SCHEMA_ID,
+                      cred_def_id: CRED_DEF_ID,
+                    },
+                  ],
+                },
+              },
+              requested_predicates: {},
+            },
+          },
+        },
+      )
+      console.log('Proof request response:', proofReq.data)
+      return proofReq.data.pres_ex_id
+    } catch (err) {
+      console.error('Proof request error:', {
+        message: err.message,
+        config: err.config,
+        response: err.response?.data,
+      })
+      logger.error('Failed to create proof request', err)
+      throw err
+    }
+  }
+
+  const createOOBInvitation = async (presExId: string) => {
+    try {
+      console.log('Creating OOB invitation for presExId:', presExId)
+      console.log(
+        'OOB invitation endpoint:',
+        `${AGENT_URL}/out-of-band/create-invitation`,
+      )
+      const oobInvite = await axios.post(
+        `${AGENT_URL}/out-of-band/create-invitation`,
+        {
+          handshake_protocols: ['https://didcomm.org/didexchange/1.0'],
+          auto_accept: true,
+          attachments: [
+            {
+              id: presExId,
+              type: 'present-proof',
+            },
+          ],
+        },
+      )
+      console.log('OOB invitation response:', oobInvite.data)
+      return oobInvite.data.invitation_url
+    } catch (err) {
+      console.error('OOB invitation error:', {
+        message: err.message,
+        config: err.config,
+        response: err.response?.data,
+      })
+      logger.error('Failed to create OOB invitation', err)
+      throw err
+    }
+  }
 
   const onNextPress = () => {
     const inviteCode = inviteCodeValueRef.current
@@ -127,9 +220,78 @@ export function StepInfo({
     })
   }
 
-  const onPressASMLSignup = React.useCallback(() => {
-    window.open('https://asml-issuer.vercel.app/', '_blank')
-  }, [])
+  const checkVerificationStatus = useCallback(async () => {
+    if (!presExId) return
+
+    try {
+      const response = await axios.get(
+        `${AGENT_URL}/present-proof-2.0/records/${presExId}`,
+      )
+      const state = response.data.state
+      setVerificationState(state)
+
+      // If verification is done, extract revealed attributes
+      if (state === 'done') {
+        const revealed =
+          response.data.by_format?.pres?.indy?.requested_proof?.revealed_attrs
+        setRevealedAttributes(revealed)
+      }
+    } catch (err) {
+      logger.error('Failed to check verification status', err)
+    }
+  }, [presExId])
+
+  useEffect(() => {
+    if (!presExId) return
+
+    const interval = setInterval(checkVerificationStatus, 2000) // Poll every 2 seconds
+    return () => clearInterval(interval)
+  }, [presExId, checkVerificationStatus])
+
+  const onPressASMLSignup = React.useCallback(async () => {
+    try {
+      // First, open the ASML issuer page in a new tab
+      window.open('https://asml-issuer.vercel.app/', '_blank')
+
+      // Then start generating QR code in the background
+      setIsGeneratingQR(true)
+      setShowQR(false)
+
+      console.log('Creating proof request...')
+      const presExId = await createProofRequest()
+      console.log('Proof request ID:', presExId)
+      setPresExId(presExId)
+
+      console.log('Creating OOB invitation...')
+      const inviteUrl = await createOOBInvitation(presExId)
+      console.log('Original invite URL:', inviteUrl)
+
+      const tinyUrlEndpoint = `${TINYURL_API}${encodeURIComponent(inviteUrl)}`
+      console.log('TinyURL API endpoint:', tinyUrlEndpoint)
+
+      const shortUrl = await axios.get(tinyUrlEndpoint)
+      console.log('Shortened URL:', shortUrl.data)
+
+      setQrUrl(shortUrl.data)
+      setShowQR(true)
+    } catch (err) {
+      console.error('Error details:', {
+        message: err.message,
+        config: err.config,
+        response: err.response?.data,
+      })
+      logger.error('Failed to generate QR code', err)
+      dispatch({
+        type: 'setError',
+        value: _(
+          msg`Failed to generate verification QR code. Please try again.`,
+        ),
+      })
+      setShowQR(false)
+    } finally {
+      setIsGeneratingQR(false)
+    }
+  }, [_, dispatch])
 
   return (
     <ScreenTransition>
@@ -250,22 +412,64 @@ export function StepInfo({
             <Text style={[a.text_center, a.text_contrast_medium, a.mb_lg]}>
               <Trans>Get verified with ASML</Trans>
             </Text>
-            <Button
-              variant="solid"
-              color="secondary"
-              size="large"
-              onPress={onPressASMLSignup}
-              style={[
-                a.flex_row,
-                a.justify_center,
-                a.align_center,
-                a.gap_md,
-                {backgroundColor: '#000000'},
-              ]}>
-              <ButtonText style={{color: '#FFFFFF'}}>
-                <Trans>Continue with ASML</Trans>
-              </ButtonText>
-            </Button>
+            {showQR ? (
+              <View style={[a.align_center, a.gap_md]}>
+                <QRCode value={qrUrl} size={200} />
+                <View
+                  style={[
+                    a.bg_contrast_25,
+                    a.p_lg,
+                    a.rounded_lg,
+                    a.w_full,
+                    a.mt_md,
+                  ]}>
+                  <Text style={[a.text_sm, a.text_center, a.mb_sm]}>
+                    <Trans>
+                      Verification Status:{' '}
+                      {verificationState || 'Waiting for scan...'}
+                    </Trans>
+                  </Text>
+
+                  {verificationState === 'done' && revealedAttributes && (
+                    <View style={[a.mt_md]}>
+                      <Text style={[a.text_sm, a.font_bold, a.mb_xs]}>
+                        <Trans>Verified Attributes:</Trans>
+                      </Text>
+                      {Object.entries(revealedAttributes).map(
+                        ([key, value]: [string, any]) => (
+                          <Text key={key} style={[a.text_sm]}>
+                            {key}: {value.raw}
+                          </Text>
+                        ),
+                      )}
+                    </View>
+                  )}
+                </View>
+              </View>
+            ) : (
+              <Button
+                variant="solid"
+                color="secondary"
+                size="large"
+                onPress={onPressASMLSignup}
+                disabled={isGeneratingQR}
+                style={[
+                  a.flex_row,
+                  a.justify_center,
+                  a.align_center,
+                  a.gap_md,
+                  {backgroundColor: '#000000'},
+                ]}>
+                <ButtonText style={{color: '#FFFFFF'}}>
+                  {isGeneratingQR ? (
+                    <Trans>Generating verification...</Trans>
+                  ) : (
+                    <Trans>Continue with ASML</Trans>
+                  )}
+                </ButtonText>
+                {isGeneratingQR && <ButtonIcon icon={Loader} />}
+              </Button>
+            )}
           </View>
         </View>
       </View>

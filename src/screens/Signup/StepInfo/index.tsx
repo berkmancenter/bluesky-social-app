@@ -27,7 +27,7 @@ import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 import {BackNextButtons} from '../BackNextButtons'
 
-const AGENT_URL = process.env.AGENT_URL || 'https://asml-acapy-bsky.ngrok.io'
+const AGENT_URL = process.env.AGENT_URL || 'http://0.0.0.0:8041'
 const SCHEMA_ID =
   process.env.SCHEMA_ID ||
   'LJWQmqq9sE8safrFQqQnUv:2:phone verification:77.81.71'

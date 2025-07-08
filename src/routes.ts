@@ -57,6 +57,7 @@ export const router = new Router<AllNavigatableRoutes>({
   AboutSettings: '/settings/about',
   AppIconSettings: '/settings/app-icon',
   NotificationSettings: '/settings/notifications',
+  VerifiableCredentialsSettings: '/settings/verifiable-credentials',
   ReplyNotificationSettings: '/settings/notifications/replies',
   MentionNotificationSettings: '/settings/notifications/mentions',
   QuoteNotificationSettings: '/settings/notifications/quotes',

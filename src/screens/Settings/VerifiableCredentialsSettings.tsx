@@ -9,6 +9,10 @@ import {logger} from '#/logger'
 import * as Toast from '#/view/com/util/Toast'
 import * as SettingsList from '#/screens/Settings/components/SettingsList'
 import {atoms as a, useTheme} from '#/alf'
+import {
+  useVerifiableCredentialsDialogControl,
+  VerifiableCredentialsDialogScreenID,
+} from '#/components/dialogs/VerifiableCredentialsDialog'
 import {Check_Stroke2_Corner0_Rounded as CheckIcon} from '#/components/icons/Check'
 import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/Shield'
 import * as Layout from '#/components/Layout'
@@ -22,29 +26,27 @@ type Props = NativeStackScreenProps<
 export function VerifiableCredentialsSettingsScreen({}: Props) {
   const {_} = useLingui()
   const t = useTheme()
+  const verifiableCredentialsDialogControl =
+    useVerifiableCredentialsDialogControl()
 
   // Mock state - replace with actual credential status from your API
-  const [credentialStatus] = useState({
+  const [credentialStatus, setCredentialStatus] = useState({
     age: {verified: false, verifiedAt: null},
     account: {verified: false, verifiedAt: null},
   })
 
-  const handleVerifyCredential = async (_type: 'age' | 'account') => {
+  const handleVerifyCredential = async (type: 'age' | 'account') => {
     try {
-      logger.info('VerifiableCredentialsSettings: Starting verification')
-      Toast.show(_(msg`Verification feature coming soon!`))
-
-      // TODO: Call your verification service API here
-      // const response = await fetch('YOUR_VERIFICATION_SERVICE_URL', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     credentialType: type,
-      //     userId: currentUser.id,
-      //     callbackUrl: 'bluesky://credential-verification/callback'
-      //   })
-      // })
-      // const {qrCodeUrl} = await response.json()
+      logger.info('VerifiableCredentialsSettings: Starting verification', {
+        credentialType: type,
+      })
+      verifiableCredentialsDialogControl.open({
+        id: VerifiableCredentialsDialogScreenID.Verify,
+        credentialType: type,
+        onVerify: () => {
+          handleVerificationComplete(type)
+        },
+      })
     } catch (error) {
       logger.error(
         'VerifiableCredentialsSettings: Failed to start verification',
@@ -52,6 +54,22 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
       )
       Toast.show(_(msg`Failed to start verification. Please try again.`))
     }
+  }
+
+  const handleVerificationComplete = (type: 'age' | 'account') => {
+    // Update the credential status
+    setCredentialStatus(prev => ({
+      ...prev,
+      [type]: {
+        verified: true,
+        verifiedAt: new Date(),
+      },
+    }))
+
+    Toast.show(_(msg`Verification completed successfully!`))
+    logger.info('VerifiableCredentialsSettings: Verification completed', {
+      credentialType: type,
+    })
   }
 
   const getCredentialStatusText = (type: 'age' | 'account') => {
@@ -97,7 +115,6 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
               )}
             </View>
           </SettingsList.Item>
-
           <SettingsList.PressableItem
             onPress={() => handleVerifyCredential('age')}
             label={_(msg`Verify your age`)}
@@ -129,7 +146,6 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
               )}
             </View>
           </SettingsList.Item>
-
           <SettingsList.PressableItem
             onPress={() => handleVerifyCredential('account')}
             label={_(msg`Verify your social media accounts`)}
@@ -145,14 +161,16 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
 
           <SettingsList.Item>
             <SettingsList.ItemText
-              style={[a.text_sm, t.atoms.text_contrast_medium]}>
-              <Text>
-                <Trans>
-                  Verifiable credentials allow you to prove your age or account
-                  ownership without revealing unnecessary personal information.
-                  Your data stays private and secure in your wallet.
-                </Trans>
-              </Text>
+              style={[
+                a.text_sm,
+                t.atoms.text_contrast_medium,
+                {textAlign: 'center'},
+              ]}>
+              <Trans>
+                Verifiable credentials allow you to prove your age or account
+                ownership without revealing unnecessary personal information.
+                Your data stays private and secure in your wallet.
+              </Trans>
             </SettingsList.ItemText>
           </SettingsList.Item>
         </SettingsList.Container>

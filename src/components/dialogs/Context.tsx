@@ -2,6 +2,7 @@ import {createContext, useContext, useMemo, useState} from 'react'
 
 import * as Dialog from '#/components/Dialog'
 import {type Screen} from '#/components/dialogs/EmailDialog/types'
+import {type Screen as VerifiableCredentialsScreen} from '#/components/dialogs/VerifiableCredentialsDialog/types'
 
 type Control = Dialog.DialogControlProps
 
@@ -17,6 +18,7 @@ type ControlsContext = {
   signinDialogControl: Control
   inAppBrowserConsentControl: StatefulControl<string>
   emailDialogControl: StatefulControl<Screen>
+  verifiableCredentialsDialogControl: StatefulControl<VerifiableCredentialsScreen>
   linkWarningDialogControl: StatefulControl<{
     href: string
     displayText: string
@@ -41,6 +43,8 @@ export function Provider({children}: React.PropsWithChildren<{}>) {
   const signinDialogControl = Dialog.useDialogControl()
   const inAppBrowserConsentControl = useStatefulDialogControl<string>()
   const emailDialogControl = useStatefulDialogControl<Screen>()
+  const verifiableCredentialsDialogControl =
+    useStatefulDialogControl<VerifiableCredentialsScreen>()
   const linkWarningDialogControl = useStatefulDialogControl<{
     href: string
     displayText: string
@@ -53,6 +57,7 @@ export function Provider({children}: React.PropsWithChildren<{}>) {
       signinDialogControl,
       inAppBrowserConsentControl,
       emailDialogControl,
+      verifiableCredentialsDialogControl,
       linkWarningDialogControl,
     }),
     [
@@ -60,6 +65,7 @@ export function Provider({children}: React.PropsWithChildren<{}>) {
       signinDialogControl,
       inAppBrowserConsentControl,
       emailDialogControl,
+      verifiableCredentialsDialogControl,
       linkWarningDialogControl,
     ],
   )

@@ -30,6 +30,7 @@ import {InAppBrowserConsentDialog} from '#/components/dialogs/InAppBrowserConsen
 import {LinkWarningDialog} from '#/components/dialogs/LinkWarning'
 import {MutedWordsDialog} from '#/components/dialogs/MutedWords'
 import {SigninDialog} from '#/components/dialogs/Signin'
+import {VerifiableCredentialsDialog} from '#/components/dialogs/VerifiableCredentialsDialog'
 import {Outlet as PortalOutlet} from '#/components/Portal'
 import {RoutesContainer, TabsNavigator} from '#/Navigation'
 import {BottomSheetOutlet} from '../../../modules/bottom-sheet'
@@ -155,6 +156,7 @@ function ShellInner() {
       <MutedWordsDialog />
       <SigninDialog />
       <EmailDialog />
+      <VerifiableCredentialsDialog />
       <InAppBrowserConsentDialog />
       <LinkWarningDialog />
       <Lightbox />

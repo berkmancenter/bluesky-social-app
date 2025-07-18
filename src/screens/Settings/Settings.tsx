@@ -52,6 +52,7 @@ import {
   PersonX_Stroke2_Corner0_Rounded as PersonXIcon,
 } from '#/components/icons/Person'
 import {RaisingHand4Finger_Stroke2_Corner2_Rounded as HandIcon} from '#/components/icons/RaisingHand'
+import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/Shield'
 import {Window_Stroke2_Corner2_Rounded as WindowIcon} from '#/components/icons/Window'
 import * as Layout from '#/components/Layout'
 import {Loader} from '#/components/Loader'
@@ -180,6 +181,14 @@ export function SettingsScreen({}: Props) {
             <SettingsList.ItemIcon icon={HandIcon} />
             <SettingsList.ItemText>
               <Trans>Moderation</Trans>
+            </SettingsList.ItemText>
+          </SettingsList.LinkItem>
+          <SettingsList.LinkItem
+            to="/settings/verifiable-credentials"
+            label={_(msg`Verifiable credentials`)}>
+            <SettingsList.ItemIcon icon={ShieldIcon} />
+            <SettingsList.ItemText>
+              <Trans>Verifiable credentials</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem

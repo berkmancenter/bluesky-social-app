@@ -21,6 +21,7 @@ import {EmailDialog} from '#/components/dialogs/EmailDialog'
 import {LinkWarningDialog} from '#/components/dialogs/LinkWarning'
 import {MutedWordsDialog} from '#/components/dialogs/MutedWords'
 import {SigninDialog} from '#/components/dialogs/Signin'
+import {VerifiableCredentialsDialog} from '#/components/dialogs/VerifiableCredentialsDialog'
 import {Outlet as PortalOutlet} from '#/components/Portal'
 import {FlatNavigator, RoutesContainer} from '#/Navigation'
 import {Composer} from './Composer.web'
@@ -70,6 +71,7 @@ function ShellInner() {
       <MutedWordsDialog />
       <SigninDialog />
       <EmailDialog />
+      <VerifiableCredentialsDialog />
       <LinkWarningDialog />
       <Lightbox />
       <PortalOutlet />

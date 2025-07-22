@@ -96,6 +96,7 @@ import {LanguageSettingsScreen} from '#/screens/Settings/LanguageSettings'
 import {PrivacyAndSecuritySettingsScreen} from '#/screens/Settings/PrivacyAndSecuritySettings'
 import {SettingsScreen} from '#/screens/Settings/Settings'
 import {ThreadPreferencesScreen} from '#/screens/Settings/ThreadPreferences'
+import {VerifiableCredentialsSettingsScreen} from '#/screens/Settings/VerifiableCredentialsSettings'
 import {
   StarterPackScreen,
   StarterPackScreenShort,
@@ -585,6 +586,11 @@ function commonScreens(Stack: typeof Flat, unreadCountLabel?: string) {
           title: title(msg`Video Feed`),
           requireAuth: true,
         }}
+      />
+      <Stack.Screen
+        name="VerifiableCredentialsSettings"
+        getComponent={() => VerifiableCredentialsSettingsScreen}
+        options={{title: title(msg`Verifiable Credentials`), requireAuth: true}}
       />
     </>
   )

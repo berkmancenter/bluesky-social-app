@@ -13,7 +13,9 @@ export const EMBED_SERVICE = 'https://embed.bsky.app'
 export const EMBED_SCRIPT = `${EMBED_SERVICE}/static/embed.js`
 export const BSKY_DOWNLOAD_URL = 'https://bsky.app/download'
 export const STARTER_PACK_MAX_SIZE = 150
-
+// Credential Verifier Configuration
+export const CREDENTIAL_VERIFIER_ENDPOINT =
+  'https://verifier-server.asml.berkmancenter.org'
 // HACK
 // Yes, this is exactly what it looks like. It's a hard-coded constant
 // reflecting the number of new users in the last week. We don't have

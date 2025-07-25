@@ -18,3 +18,10 @@ export type Account = {
   searchTermHistory?: string[]
   searchAccountHistory?: string[]
 }
+
+export type CredentialConnection = {
+  connectionId: string
+  status: 'active'
+  createdAt: string
+  updatedAt: string
+}

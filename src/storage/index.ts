@@ -1,7 +1,11 @@
 import {useCallback, useEffect, useState} from 'react'
 import {MMKV} from 'react-native-mmkv'
 
-import {type Account, type Device} from '#/storage/schema'
+import {
+  type Account,
+  type CredentialConnection,
+  type Device,
+} from '#/storage/schema'
 
 export * from '#/storage/schema'
 
@@ -136,6 +140,14 @@ export const device = new Storage<[], Device>({id: 'bsky_device'})
  * Account data that's specific to the account on this device
  */
 export const account = new Storage<[string], Account>({id: 'bsky_account'})
+
+/**
+ * Verifiable credential flows. Used to persist successful connections.
+ */
+export const credentialConnections = new Storage<
+  [string],
+  CredentialConnection
+>({id: 'bsky_credential_connections'})
 
 if (__DEV__ && typeof window !== 'undefined') {
   // @ts-expect-error - dev global

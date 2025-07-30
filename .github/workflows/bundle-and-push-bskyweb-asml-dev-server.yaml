@@ -9,10 +9,17 @@ on:
 
 jobs:
   build-and-deploy:
+    environment: development
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
+      # Prepare SSH key for SFTPcat
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
@@ -25,12 +32,6 @@ jobs:
       - name: Build web
         run: yarn build-web
 
-      # Prepare for SFTP upload
-      - name: Setup SSH key
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.DEV_SERVER_PRIVATE_KEY }}
-
       - name: Upload built files with SFTP
         run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" web-build/ ${{ secrets.SFTP_USER }}@${{ secrets.SFTP_HOST }}:${{ secrets.SFTP_PATH }}
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" web-build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SFTP_PATH }}

@@ -21,9 +21,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync
-
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
@@ -35,6 +32,6 @@ jobs:
       - name: Build web
         run: yarn build-web
 
-      - name: Upload built files with SFTP
+      - name: Upload built files with rsync
         run: |
           rsync -avz -e "ssh -o StrictHostKeyChecking=no" web-build/ ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }}:${{ vars.SFTP_PATH }}

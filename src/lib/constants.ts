@@ -16,6 +16,9 @@ export const STARTER_PACK_MAX_SIZE = 150
 // Credential Verifier Configuration
 export const CREDENTIAL_VERIFIER_ENDPOINT =
   'https://verifier-server.asml.berkmancenter.org'
+
+// Credential Definition IDs (not sensitive). In prod case we probably need to interact with an API
+export const AGE_CRED_DEF_ID = 'VPSZ5XQA8EULcjUxL9HTfQ:3:CL:39:mdl'
 // HACK
 // Yes, this is exactly what it looks like. It's a hard-coded constant
 // reflecting the number of new users in the last week. We don't have

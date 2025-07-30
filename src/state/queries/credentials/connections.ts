@@ -1,14 +1,14 @@
-import {useEffect, useRef, useState} from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import {useEffect} from 'react'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 
 import {connectionsAPI} from '#/lib/api/credentials/connections'
+import {useCredentialState} from '#/lib/hooks/useCredentialState'
+import {usePolling} from '#/lib/hooks/usePolling'
+import {connectionStorage} from '#/lib/storage/credentialStorage'
 import {logger} from '#/logger'
 
 const RQKEY_ROOT = 'connections'
 export const RQKEY = (key: string) => [RQKEY_ROOT, key]
-
-const CONNECTION_STORAGE_KEY = 'bsky_credential_connections'
 
 export function useCreateConnectionInvitationMutation() {
   const queryClient = useQueryClient()
@@ -51,34 +51,35 @@ export function useConnectionQuery(connectionId: string) {
 }
 
 export function usePersistentConnection(connectionId: string) {
-  const queryClient = useQueryClient()
-  const [connection, setConnection] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const {
+    data: connection,
+    isLoading,
+    updateData,
+    setLoading,
+    setErrorState,
+  } = useCredentialState<any>(null)
 
   // Poll for connection status updates
   const {data: serverConnection} = useConnectionQuery(connectionId)
-  const pollingIntervalRef = useRef<NodeJS.Timeout>()
 
   // Load connection from storage
   useEffect(() => {
     const loadConnection = async () => {
       try {
-        const existingData = await AsyncStorage.getItem(CONNECTION_STORAGE_KEY)
-        const connections = existingData ? JSON.parse(existingData) : {}
-        const storedConnection = connections[connectionId]
-
+        const storedConnection = await connectionStorage.getItem(connectionId)
         if (storedConnection) {
-          setConnection(storedConnection)
+          updateData(storedConnection)
         }
       } catch (error) {
         logger.error('Failed to load connection from storage', {error})
+        setErrorState('Failed to load connection from storage')
       } finally {
-        setIsLoading(false)
+        setLoading(false)
       }
     }
 
     loadConnection()
-  }, [connectionId])
+  }, [connectionId, updateData, setLoading, setErrorState])
 
   // Update connection when server data changes
   useEffect(() => {
@@ -93,59 +94,17 @@ export function usePersistentConnection(connectionId: string) {
         updatedAt: serverConnection.updated_at,
       }
 
-      setConnection(connectionData)
-
-      // Save to storage only when active
-      const saveToStorage = async () => {
-        try {
-          const existingData = await AsyncStorage.getItem(
-            CONNECTION_STORAGE_KEY,
-          )
-          const connections = existingData ? JSON.parse(existingData) : {}
-          connections[connectionId] = connectionData
-          await AsyncStorage.setItem(
-            CONNECTION_STORAGE_KEY,
-            JSON.stringify(connections),
-          )
-        } catch (error) {
-          logger.error('Failed to save active connection to storage', {error})
-        }
-      }
-
-      saveToStorage()
+      updateData(connectionData)
+      connectionStorage.saveItem(connectionId, connectionData)
     }
-  }, [serverConnection, connectionId])
+  }, [serverConnection, connectionId, updateData])
 
-  // Start polling if connection is still pending
-  useEffect(() => {
-    // Stop polling if server shows active, regardless of local connection state
-    if (serverConnection?.state === 'active') {
-      if (pollingIntervalRef.current) {
-        clearInterval(pollingIntervalRef.current)
-      }
-      return
-    }
-
-    // Start polling if we have a connection and it's not active, OR if we have a connectionId but no connection yet
-    if (
-      (connection && connection.status !== 'active') ||
-      (connectionId && !connection)
-    ) {
-      pollingIntervalRef.current = setInterval(() => {
-        queryClient.invalidateQueries({queryKey: RQKEY(connectionId)})
-      }, 3000) // Poll every 3 seconds
-
-      return () => {
-        if (pollingIntervalRef.current) {
-          clearInterval(pollingIntervalRef.current)
-        }
-      }
-    }
-  }, [connection, connectionId, queryClient, serverConnection])
+  // Use shared polling hook
+  usePolling(connectionId, connection, ['active'], RQKEY_ROOT, 3000)
 
   return {
     connection,
     isLoading,
-    updateConnection: setConnection,
+    updateConnection: updateData,
   }
 }

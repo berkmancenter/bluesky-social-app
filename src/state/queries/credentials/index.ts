@@ -14,8 +14,6 @@ export function useStartCredentialFlowMutation() {
   })
 }
 
-// TODO: Add proof request mutation hook
-
 // Re-export everything for convenience
 export {
   useConnectionQuery,
@@ -23,3 +21,9 @@ export {
   useCreateConnectionInvitationMutation,
   usePersistentConnection,
 } from './connections'
+export {
+  usePersistentProofRequest,
+  useProofRecordQuery,
+  useProofRecordsQuery,
+  useRequestAgeProofMutation,
+} from './proof-requests'

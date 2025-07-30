@@ -34,4 +34,4 @@ jobs:
 
       - name: Upload built files with SFTP
         run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" web-build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SFTP_PATH }}
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" web-build/ ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }}:${{ vars.SFTP_PATH }}

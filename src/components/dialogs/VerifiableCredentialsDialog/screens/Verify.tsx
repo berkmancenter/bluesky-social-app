@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
@@ -20,7 +20,7 @@ import {Text} from '#/components/Typography'
 import {CredentialVerifierQrCode} from '#/components/VerifiableCredentials/CredentialVerifierQrCode'
 
 type CredentialData = {
-  step: 'qr' | 'scanning' | 'proof-request' | 'success'
+  step: 'qr' | 'proof-request' | 'success' | 'error'
   invitationUrl: string
   connectionId: string
   presExId: string
@@ -40,10 +40,18 @@ export function Verify({config}: any) {
   const hasCreatedInvitation = useRef(false)
   const hasSentProofRequest = useRef(false)
 
+  // ===== CREDENTIAL VERIFICATION FLOW =====
+  // This component manages a 4-phase credential verification process:
+  // 1. INITIAL SETUP: Generate connection invitation and QR code
+  // 2. DATA FETCHING: Poll for connection and proof request status updates
+  // 3. REACTIVE STATE MANAGEMENT: Handle server state changes and update UI
+  // 4. AUTO-EXECUTION: Automatically send proof request when connection becomes active
+  // ======================================
+
   // Use unified state management for all operations
   const {
     data: credentialData,
-    status: mutationStatus,
+    error,
     setLoading,
     setErrorState,
     updateData,
@@ -53,7 +61,7 @@ export function Verify({config}: any) {
   const startCredentialFlow = useStartCredentialFlowMutation()
   const requestAgeProof = useRequestAgeProofMutation()
 
-  // Generate connection invitation when component mounts
+  // ===== PHASE 1: INITIAL SETUP - Generate connection invitation =====
   useEffect(() => {
     const generateInvitation = async () => {
       try {
@@ -95,72 +103,20 @@ export function Verify({config}: any) {
     updateData,
   ])
 
+  // ===== PHASE 2: DATA FETCHING - Poll for server state updates =====
   // Use persistent connection for polling status
-  const {connection} = usePersistentConnection(
+  const {serverConnection} = usePersistentConnection(
     credentialData?.connectionId || '',
   )
-
-  // Auto-send proof request when connection becomes active
-  const sendProofRequest = useCallback(async () => {
-    if (
-      connection?.status === 'active' &&
-      !hasSentProofRequest.current &&
-      credentialData?.connectionId
-    ) {
-      try {
-        hasSentProofRequest.current = true
-        updateData({
-          step: 'proof-request',
-          invitationUrl: credentialData.invitationUrl,
-          connectionId: credentialData.connectionId,
-          presExId: credentialData.presExId,
-        })
-
-        const credentialDefinitionId = AGE_CRED_DEF_ID
-
-        const proofResponse = await requestAgeProof.mutateAsync({
-          connectionId: credentialData.connectionId,
-          credentialDefinitionId,
-        })
-
-        updateData({
-          step: 'proof-request', // Keep the step as proof-request until polling completes
-          invitationUrl: credentialData.invitationUrl,
-          connectionId: credentialData.connectionId,
-          presExId: proofResponse.pres_ex_id,
-        })
-
-        logger.info('Proof request sent successfully', {
-          presExId: proofResponse.pres_ex_id,
-        })
-      } catch (error) {
-        logger.error('Failed to send proof request', {error})
-        const errorMessage = _(
-          msg`Failed to send proof request, please try again.`,
-        )
-        setErrorState(errorMessage)
-      }
-    }
-  }, [
-    connection?.status,
-    credentialData,
-    requestAgeProof,
-    _,
-    setErrorState,
-    updateData,
-  ])
-
-  useEffect(() => {
-    sendProofRequest()
-  }, [sendProofRequest])
 
   // Monitor proof request status
   const {serverProofRequest} = usePersistentProofRequest(
     credentialData?.presExId || '',
   )
 
-  // Update step based on proof request status and hide loading when complete
+  // ===== PHASE 3: REACTIVE STATE MANAGEMENT - Handle server state changes =====
   useEffect(() => {
+    // Handle proof request success states
     if (
       serverProofRequest?.state === 'verified' ||
       serverProofRequest?.state === 'done'
@@ -171,9 +127,82 @@ export function Verify({config}: any) {
         connectionId: credentialData?.connectionId || '',
         presExId: credentialData?.presExId || '',
       })
-      setLoading(false) // Hide loading when proof request is complete
+      setLoading(false)
     }
-  }, [serverProofRequest?.state, updateData, setLoading, credentialData])
+
+    // Handle proof request abandoned state
+    if (serverProofRequest?.state === 'abandoned') {
+      updateData({
+        step: 'error',
+        invitationUrl: credentialData?.invitationUrl || '',
+        connectionId: credentialData?.connectionId || '',
+        presExId: credentialData?.presExId || '',
+      })
+      setErrorState('Proof request was rejected by the user')
+      setLoading(false)
+    }
+  }, [
+    serverConnection?.state,
+    serverProofRequest?.state,
+    credentialData,
+    updateData,
+    setLoading,
+    setErrorState,
+  ])
+
+  // ===== PHASE 4: AUTO-EXECUTION - Send proof request when connection becomes active =====
+  useEffect(() => {
+    const sendProofRequest = async () => {
+      if (
+        serverConnection?.state === 'active' &&
+        !hasSentProofRequest.current &&
+        credentialData?.connectionId
+      ) {
+        try {
+          hasSentProofRequest.current = true
+          updateData({
+            step: 'proof-request',
+            invitationUrl: credentialData.invitationUrl,
+            connectionId: credentialData.connectionId,
+            presExId: credentialData.presExId,
+          })
+
+          const credentialDefinitionId = AGE_CRED_DEF_ID
+
+          const proofResponse = await requestAgeProof.mutateAsync({
+            connectionId: credentialData.connectionId,
+            credentialDefinitionId,
+          })
+
+          updateData({
+            step: 'proof-request', // Keep the step as proof-request until polling completes
+            invitationUrl: credentialData.invitationUrl,
+            connectionId: credentialData.connectionId,
+            presExId: proofResponse.pres_ex_id,
+          })
+
+          logger.info('Proof request sent successfully', {
+            presExId: proofResponse.pres_ex_id,
+          })
+        } catch (error) {
+          logger.error('Failed to send proof request', {error})
+          const errorMessage = _(
+            msg`Failed to send proof request, please try again.`,
+          )
+          setErrorState(errorMessage)
+        }
+      }
+    }
+
+    sendProofRequest()
+  }, [
+    serverConnection?.state,
+    credentialData,
+    requestAgeProof,
+    _,
+    setErrorState,
+    updateData,
+  ])
 
   const getCredentialTitle = () => {
     switch (config.credentialType) {
@@ -192,14 +221,16 @@ export function Verify({config}: any) {
         return _(
           msg`Scan this QR code with your wallet to establish a secure connection.`,
         )
-      case 'scanning':
-        return _(msg`Waiting for wallet connection...`)
       case 'proof-request':
         return _(
           msg`Connection established! Sending age verification request...`,
         )
       case 'success':
         return _(msg`Age verification completed successfully!`)
+      case 'error':
+        return _(
+          msg`The verification process was interrupted. Please try again.`,
+        )
       default:
         return _(
           msg`Scan this QR code with your wallet to establish a secure connection.`,
@@ -234,8 +265,8 @@ export function Verify({config}: any) {
         ]}>
         <Trans>{getStepMessage()}</Trans>
       </Text>
-      {(mutationStatus === 'loading' && !credentialData?.invitationUrl) ||
-      credentialData?.step === 'proof-request' ? (
+      {credentialData?.step === 'proof-request' ||
+      (!credentialData?.invitationUrl && credentialData?.step === 'qr') ? (
         <View style={{marginVertical: 40, alignItems: 'center'}}>
           <Loader />
         </View>
@@ -248,6 +279,25 @@ export function Verify({config}: any) {
               {textAlign: 'center', color: t.palette.positive_600},
             ]}>
             Verification Complete
+          </Text>
+        </View>
+      ) : credentialData?.step === 'error' ? (
+        <View style={{marginVertical: 40, alignItems: 'center'}}>
+          <Text
+            style={[
+              a.text_lg,
+              a.font_bold,
+              {textAlign: 'center', color: t.palette.negative_600},
+            ]}>
+            Verification Failed
+          </Text>
+          <Text
+            style={[
+              a.text_md,
+              t.atoms.text_contrast_medium,
+              {textAlign: 'center', marginTop: 8},
+            ]}>
+            {error}
           </Text>
         </View>
       ) : (

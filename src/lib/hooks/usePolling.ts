@@ -13,7 +13,7 @@ export function usePolling<T>(
 
   useEffect(() => {
     const shouldPoll =
-      (localState && !finalStates.includes((localState as any).status)) ||
+      (localState && !finalStates.includes((localState as any).state)) ||
       (id && !localState)
 
     if (shouldPoll) {

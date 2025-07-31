@@ -1,9 +1,7 @@
-import {useEffect} from 'react'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 
 import {credentialsAPI} from '#/lib/api/credentials'
 import {proofRequestsAPI} from '#/lib/api/credentials/proof-requests'
-import {useCredentialState} from '#/lib/hooks/useCredentialState'
 import {usePolling} from '#/lib/hooks/usePolling'
 import {proofRequestStorage} from '#/lib/storage/credentialStorage'
 import {logger} from '#/logger'
@@ -73,65 +71,19 @@ export function useProofRecordQuery(presExId: string) {
 }
 
 export function usePersistentProofRequest(presExId: string) {
-  const {
-    data: proofRequest,
-    isLoading,
-    updateData,
-    setLoading,
-    setErrorState,
-  } = useCredentialState<any>(null)
-
   // Poll for proof request status updates
   const {data: serverProofRequest} = useProofRecordQuery(presExId)
 
-  // Load proof request from storage
-  useEffect(() => {
-    const loadProofRequest = async () => {
-      try {
-        const storedProofRequest = await proofRequestStorage.getItem(presExId)
-        if (storedProofRequest) {
-          updateData(storedProofRequest)
-        }
-      } catch (error) {
-        logger.error('Failed to load proof request from storage', {error})
-        setErrorState('Failed to load proof request from storage')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadProofRequest()
-  }, [presExId, updateData, setLoading, setErrorState])
-
-  // Update proof request when server data changes
-  useEffect(() => {
-    if (!serverProofRequest) return
-
-    // Save to storage when proof request is verified
-    if (
-      serverProofRequest.state === 'verified' ||
-      serverProofRequest.state === 'done'
-    ) {
-      const proofRequestData = {
-        presExId: serverProofRequest.pres_ex_id,
-        status: serverProofRequest.state,
-        createdAt: serverProofRequest.created_at,
-        updatedAt: serverProofRequest.updated_at,
-      }
-
-      updateData(proofRequestData)
-
-      // Save to storage using the shared function
-      saveProofRequestToStorage(serverProofRequest)
-    }
-  }, [serverProofRequest, presExId, updateData])
-
-  // Use shared polling hook
-  usePolling(presExId, proofRequest, ['verified', 'done'], RQKEY_ROOT, 3000)
+  // Use shared polling hook - include 'abandoned' as a final state
+  usePolling(
+    presExId,
+    serverProofRequest,
+    ['verified', 'done', 'abandoned'],
+    RQKEY_ROOT,
+    3000,
+  )
 
   return {
-    proofRequest,
-    isLoading,
     serverProofRequest,
   }
 }

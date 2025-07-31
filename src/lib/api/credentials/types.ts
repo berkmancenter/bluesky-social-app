@@ -62,6 +62,7 @@ export interface ProofRequestResponse {
     | 'presentation-received'
     | 'verified'
     | 'done'
+    | 'abandoned'
   created_at: string
   updated_at: string
 }
@@ -75,6 +76,7 @@ export interface ProofRecord {
     | 'presentation-received'
     | 'verified'
     | 'done'
+    | 'abandoned'
   created_at: string
   updated_at: string
   presentation_request: any

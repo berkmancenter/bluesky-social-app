@@ -1,10 +1,7 @@
-import {useEffect} from 'react'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 
 import {connectionsAPI} from '#/lib/api/credentials/connections'
-import {useCredentialState} from '#/lib/hooks/useCredentialState'
 import {usePolling} from '#/lib/hooks/usePolling'
-import {connectionStorage} from '#/lib/storage/credentialStorage'
 import {logger} from '#/logger'
 
 const RQKEY_ROOT = 'connections'
@@ -51,60 +48,13 @@ export function useConnectionQuery(connectionId: string) {
 }
 
 export function usePersistentConnection(connectionId: string) {
-  const {
-    data: connection,
-    isLoading,
-    updateData,
-    setLoading,
-    setErrorState,
-  } = useCredentialState<any>(null)
-
   // Poll for connection status updates
   const {data: serverConnection} = useConnectionQuery(connectionId)
 
-  // Load connection from storage
-  useEffect(() => {
-    const loadConnection = async () => {
-      try {
-        const storedConnection = await connectionStorage.getItem(connectionId)
-        if (storedConnection) {
-          updateData(storedConnection)
-        }
-      } catch (error) {
-        logger.error('Failed to load connection from storage', {error})
-        setErrorState('Failed to load connection from storage')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadConnection()
-  }, [connectionId, updateData, setLoading, setErrorState])
-
-  // Update connection when server data changes
-  useEffect(() => {
-    if (!serverConnection) return
-
-    // Only save to storage when connection becomes active
-    if (serverConnection.state === 'active') {
-      const connectionData = {
-        connectionId: serverConnection.connection_id,
-        status: 'active' as const,
-        createdAt: serverConnection.created_at,
-        updatedAt: serverConnection.updated_at,
-      }
-
-      updateData(connectionData)
-      connectionStorage.saveItem(connectionId, connectionData)
-    }
-  }, [serverConnection, connectionId, updateData])
-
   // Use shared polling hook
-  usePolling(connectionId, connection, ['active'], RQKEY_ROOT, 3000)
+  usePolling(connectionId, serverConnection, ['active'], RQKEY_ROOT, 3000)
 
   return {
-    connection,
-    isLoading,
-    updateConnection: updateData,
+    serverConnection,
   }
 }

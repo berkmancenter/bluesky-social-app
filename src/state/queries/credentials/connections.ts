@@ -52,7 +52,7 @@ export function usePersistentConnection(connectionId: string) {
   const {data: serverConnection} = useConnectionQuery(connectionId)
 
   // Use shared polling hook
-  usePolling(connectionId, serverConnection, ['active'], RQKEY_ROOT, 3000)
+  usePolling(connectionId, serverConnection, ['active'], RQKEY_ROOT, 1000)
 
   return {
     serverConnection,

@@ -80,7 +80,7 @@ export function usePersistentProofRequest(presExId: string) {
     serverProofRequest,
     ['verified', 'done', 'abandoned'],
     RQKEY_ROOT,
-    3000,
+    1000,
   )
 
   return {

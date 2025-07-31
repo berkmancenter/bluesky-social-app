@@ -116,6 +116,19 @@ export function Verify({config}: any) {
 
   // ===== PHASE 3: REACTIVE STATE MANAGEMENT - Handle server state changes =====
   useEffect(() => {
+    // Handle connection state changes (QR code scanned, connection being established)
+    if (
+      serverConnection?.state === 'response' &&
+      credentialData?.step === 'qr'
+    ) {
+      updateData({
+        step: 'proof-request',
+        invitationUrl: credentialData?.invitationUrl || '',
+        connectionId: credentialData?.connectionId || '',
+        presExId: credentialData?.presExId || '',
+      })
+    }
+
     // Handle proof request success states
     if (
       serverProofRequest?.state === 'verified' ||
@@ -223,7 +236,7 @@ export function Verify({config}: any) {
         )
       case 'proof-request':
         return _(
-          msg`Connection established! Sending age verification request...`,
+          msg`Establishing connection and sending verification request...`,
         )
       case 'success':
         return _(msg`Age verification completed successfully!`)

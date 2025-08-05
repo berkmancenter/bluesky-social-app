@@ -5,6 +5,7 @@
 
 import {sha256} from 'js-sha256'
 
+import {DEFAULT_SERVICE} from '#/lib/constants'
 import {logger} from '#/logger'
 
 // Supported verification types
@@ -298,7 +299,7 @@ export async function createVerificationRecord(
     // Generate the direct PDS URL for viewing
     const pdsViewUrl = rkey
       ? getVerificationRecordUrl(
-          'https://pds-bluesky.asml.berkmancenter.org',
+          DEFAULT_SERVICE,
           sessionData.currentAccount.did,
           rkey,
         )

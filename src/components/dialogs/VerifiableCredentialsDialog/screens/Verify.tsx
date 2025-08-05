@@ -151,6 +151,17 @@ export function Verify({config}: any) {
       !hasTransitionedToSuccess.current
     ) {
       hasTransitionedToSuccess.current = true
+
+      logger.info('Proof request completed successfully', {
+        credentialType: config.credentialType,
+        presExId: credentialData?.presExId,
+        connectionId: credentialData?.connectionId,
+        proofRequestState: serverProofRequest?.state,
+        userDid: currentAccount?.did,
+        userHandle: currentAccount?.handle,
+        context: 'proof-verification-success',
+      })
+
       updateData({
         step: 'success',
         invitationUrl: credentialData?.invitationUrl || '',
@@ -187,6 +198,16 @@ export function Verify({config}: any) {
       !hasTransitionedToError.current
     ) {
       hasTransitionedToError.current = true
+
+      logger.info('Proof request was rejected by user', {
+        credentialType: config.credentialType,
+        presExId: credentialData?.presExId,
+        connectionId: credentialData?.connectionId,
+        proofRequestState: serverProofRequest?.state,
+        userDid: currentAccount?.did,
+        context: 'user-rejected-proof-request',
+      })
+
       updateData({
         step: 'error',
         invitationUrl: credentialData?.invitationUrl || '',
@@ -220,6 +241,19 @@ export function Verify({config}: any) {
       ) {
         try {
           hasSentProofRequest.current = true
+
+          logger.info(
+            'Connection established successfully, sending proof request',
+            {
+              credentialType: config.credentialType,
+              connectionId: credentialData.connectionId,
+              connectionState: serverConnection?.state,
+              userDid: currentAccount?.did,
+              userHandle: currentAccount?.handle,
+              context: 'connection-active-proof-request-initiated',
+            },
+          )
+
           updateData({
             step: 'proof-request',
             invitationUrl: credentialData.invitationUrl,
@@ -262,6 +296,9 @@ export function Verify({config}: any) {
     _,
     setErrorState,
     updateData,
+    config.credentialType,
+    currentAccount?.did,
+    currentAccount?.handle,
   ])
 
   const getCredentialTitle = () => {

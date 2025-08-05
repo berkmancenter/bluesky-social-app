@@ -46,6 +46,15 @@ export class CredentialsAPI {
                 },
               ],
             },
+            // Add expiry date attribute for MDL (correct property name)
+            expiry_date: {
+              name: 'expiry_date',
+              restrictions: [
+                {
+                  cred_def_id: credentialDefinitionId,
+                },
+              ],
+            },
           },
           requested_predicates: {
             age_verification: {

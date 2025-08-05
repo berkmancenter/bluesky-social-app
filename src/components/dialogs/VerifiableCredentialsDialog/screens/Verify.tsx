@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 
+import {createVerificationRecord} from '#/lib/api/credentials/verification-record'
 import {AGE_CRED_DEF_ID} from '#/lib/constants'
 import {useCleanError} from '#/lib/hooks/useCleanError'
 import {useCredentialState} from '#/lib/hooks/useCredentialState'
@@ -13,6 +14,9 @@ import {
   useRequestAgeProofMutation,
   useStartCredentialFlowMutation,
 } from '#/state/queries/credentials'
+import {useCurrentAccountProfile} from '#/state/queries/useCurrentAccountProfile'
+import {useSession} from '#/state/session'
+import {useAgent} from '#/state/session'
 import {atoms as a, useTheme} from '#/alf'
 import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/Shield'
 import {Loader} from '#/components/Loader'
@@ -39,6 +43,10 @@ export function Verify({config}: any) {
   const cleanError = useCleanError()
   const hasCreatedInvitation = useRef(false)
   const hasSentProofRequest = useRef(false)
+  const hasCreatedPDSRecord = useRef(false)
+  const hasTransitionedToProofRequest = useRef(false)
+  const hasTransitionedToSuccess = useRef(false)
+  const hasTransitionedToError = useRef(false)
 
   // ===== CREDENTIAL VERIFICATION FLOW =====
   // This component manages a 4-phase credential verification process:
@@ -56,6 +64,11 @@ export function Verify({config}: any) {
     setErrorState,
     updateData,
   } = useCredentialState<CredentialData>(initialCredentialData)
+
+  // Session data for PDS record creation
+  const {currentAccount} = useSession()
+  const profile = useCurrentAccountProfile()
+  const agent = useAgent()
 
   // Credential flow mutation
   const startCredentialFlow = useStartCredentialFlowMutation()
@@ -80,12 +93,12 @@ export function Verify({config}: any) {
           presExId: '',
         })
         setLoading(false) // Set loading to false when invitation is generated successfully
-      } catch (error) {
+      } catch (invitationError) {
         logger.error(
           'VerifiableCredentialsDialog: Failed to generate connection invitation',
-          {safeMessage: error},
+          {safeMessage: invitationError},
         )
-        const {clean} = cleanError(error)
+        const {clean} = cleanError(invitationError)
         const errorMessage =
           clean ||
           _(msg`Failed to generate connection invitation, please try again.`)
@@ -119,8 +132,10 @@ export function Verify({config}: any) {
     // Handle connection state changes (QR code scanned, connection being established)
     if (
       serverConnection?.state === 'response' &&
-      credentialData?.step === 'qr'
+      credentialData?.step === 'qr' &&
+      !hasTransitionedToProofRequest.current
     ) {
+      hasTransitionedToProofRequest.current = true
       updateData({
         step: 'proof-request',
         invitationUrl: credentialData?.invitationUrl || '',
@@ -131,9 +146,11 @@ export function Verify({config}: any) {
 
     // Handle proof request success states
     if (
-      serverProofRequest?.state === 'verified' ||
-      serverProofRequest?.state === 'done'
+      (serverProofRequest?.state === 'verified' ||
+        serverProofRequest?.state === 'done') &&
+      !hasTransitionedToSuccess.current
     ) {
+      hasTransitionedToSuccess.current = true
       updateData({
         step: 'success',
         invitationUrl: credentialData?.invitationUrl || '',
@@ -141,26 +158,56 @@ export function Verify({config}: any) {
         presExId: credentialData?.presExId || '',
       })
       setLoading(false)
+
+      // Create PDS verification record (only once)
+      if (
+        !hasCreatedPDSRecord.current &&
+        credentialData?.presExId &&
+        serverProofRequest
+      ) {
+        hasCreatedPDSRecord.current = true
+        createVerificationRecord(
+          {
+            presExId: credentialData.presExId,
+            proofRecord: serverProofRequest,
+            credentialType: config.credentialType,
+          },
+          {
+            currentAccount,
+            profile,
+            agent,
+          },
+        )
+      }
     }
 
     // Handle proof request abandoned state
-    if (serverProofRequest?.state === 'abandoned') {
+    if (
+      serverProofRequest?.state === 'abandoned' &&
+      !hasTransitionedToError.current
+    ) {
+      hasTransitionedToError.current = true
       updateData({
         step: 'error',
         invitationUrl: credentialData?.invitationUrl || '',
         connectionId: credentialData?.connectionId || '',
         presExId: credentialData?.presExId || '',
       })
-      setErrorState('Proof request was rejected by the user')
+      setErrorState('Rejected by the user')
       setLoading(false)
     }
   }, [
     serverConnection?.state,
     serverProofRequest?.state,
+    serverProofRequest,
     credentialData,
     updateData,
     setLoading,
     setErrorState,
+    config.credentialType,
+    currentAccount,
+    profile,
+    agent,
   ])
 
   // ===== PHASE 4: AUTO-EXECUTION - Send proof request when connection becomes active =====
@@ -197,8 +244,8 @@ export function Verify({config}: any) {
           logger.info('Proof request sent successfully', {
             presExId: proofResponse.pres_ex_id,
           })
-        } catch (error) {
-          logger.error('Failed to send proof request', {error})
+        } catch (proofError) {
+          logger.error('Failed to send proof request', {error: proofError})
           const errorMessage = _(
             msg`Failed to send proof request, please try again.`,
           )

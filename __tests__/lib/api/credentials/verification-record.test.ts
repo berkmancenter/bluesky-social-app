@@ -24,7 +24,7 @@ describe('VerificationRecord API', () => {
     com: {
       atproto: {
         repo: {
-          createRecord: jest.fn(),
+          createRecord: jest.fn() as jest.MockedFunction<any>,
         },
       },
     },
@@ -32,8 +32,8 @@ describe('VerificationRecord API', () => {
       com: {
         atproto: {
           repo: {
-            listRecords: jest.fn(),
-            getRecord: jest.fn(),
+            listRecords: jest.fn() as jest.MockedFunction<any>,
+            getRecord: jest.fn() as jest.MockedFunction<any>,
           },
         },
       },

@@ -7,9 +7,11 @@ import {sha256} from 'js-sha256'
 
 import {DEFAULT_SERVICE} from '#/lib/constants'
 import {logger} from '#/logger'
-
-// Supported verification types
-export type VerificationType = 'age' | 'account'
+import {
+  type CreateVerificationRecordParams,
+  type VerificationConfig,
+  type VerificationType,
+} from './verification-types'
 
 // Main verification record interface (what gets stored on PDS)
 export interface VerificationRecord {
@@ -17,9 +19,9 @@ export interface VerificationRecord {
   displayName: string
   subject: string // User's DID
   assertion: string // Dynamic based on verification type
-  createdAt: string // ISO date string
+  createdAt: string
   credential: CredentialData
-  // PDS metadata (populated after record creation)
+  // PDS metadata (populated after record creation). Adding this for debugging purposes.
   uri?: string // AT URI of the record
   cid?: string // Content identifier
   rkey?: string // Record key
@@ -27,7 +29,6 @@ export interface VerificationRecord {
     cid: string
     rev: string
   }
-  validationStatus?: string // 'valid' | 'invalid' etc
 }
 
 // Credential data interface (the new extension)
@@ -37,21 +38,6 @@ export interface CredentialData {
   type: string[] // ['VerifiableCredential', 'AgeVerification'] etc
   purpose: string[] // ['ProofOfMajorityAge', 'AccountVerification'] etc
   expirationDate?: string // Optional ISO date string
-}
-
-// Configuration for different verification types
-export interface VerificationConfig {
-  assertion: string
-  types: string[]
-  purposes: string[]
-  expirationDate?: string
-}
-
-// Type for createVerificationRecord parameters
-export interface CreateVerificationRecordParams {
-  presExId: string
-  proofRecord: any // The proof record from the verifier
-  credentialType: VerificationType
 }
 
 // Individual verification configurations
@@ -212,9 +198,6 @@ export function getVerificationRecordUrl(
 /**
  * Create a verification record on the Bluesky PDS
  * This extends app.bsky.graph.verification with custom credential data
- *
- * Note: This function should be called from within a React component context
- * where useSession, useCurrentAccountProfile, and useAgent are available
  */
 export async function createVerificationRecord(
   params: CreateVerificationRecordParams,
@@ -224,8 +207,6 @@ export async function createVerificationRecord(
     agent: any
   },
 ): Promise<VerificationRecord> {
-  // SHA-256 function (imported at module level)
-
   // Validate required data
   if (!sessionData.currentAccount?.did) {
     throw new Error('No authenticated user found')
@@ -277,8 +258,6 @@ export async function createVerificationRecord(
     const uri = response?.uri || response?.data?.uri
     const cid = response?.cid || response?.data?.cid
     const commit = response?.commit || response?.data?.commit
-    const validationStatus =
-      response?.validationStatus || response?.data?.validationStatus
 
     let rkey: string | undefined
 
@@ -293,7 +272,6 @@ export async function createVerificationRecord(
       cid: cid,
       rkey: rkey,
       commit: commit,
-      validationStatus: validationStatus,
     }
 
     // Generate the direct PDS URL for viewing
@@ -313,7 +291,6 @@ export async function createVerificationRecord(
       rkey: rkey,
       pdsViewUrl: pdsViewUrl, // Direct link to view the record
       commit: commit,
-      validationStatus: validationStatus,
       credentialUri: record.credential.uri,
       credentialExpirationDate: record.credential.expirationDate,
       proofHash: record.credential.hash.substring(0, 8) + '...', // Only log first 8 chars of hash

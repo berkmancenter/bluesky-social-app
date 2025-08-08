@@ -83,3 +83,6 @@ export const credentialsAPI = new CredentialsAPI()
 export {connectionsAPI} from './connections'
 export {proofRequestsAPI} from './proof-requests'
 export * from './types'
+export * from './verification-processor'
+export * from './verification-record'
+export * from './verification-types'

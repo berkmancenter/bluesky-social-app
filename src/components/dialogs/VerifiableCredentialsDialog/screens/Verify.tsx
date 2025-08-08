@@ -14,9 +14,9 @@ import {
   useRequestAgeProofMutation,
   useStartCredentialFlowMutation,
 } from '#/state/queries/credentials'
+import {useInvalidateVerificationRecords} from '#/state/queries/credentials/useVerificationRecordsQuery'
 import {useCurrentAccountProfile} from '#/state/queries/useCurrentAccountProfile'
-import {useSession} from '#/state/session'
-import {useAgent} from '#/state/session'
+import {useAgent, useSession} from '#/state/session'
 import {atoms as a, useTheme} from '#/alf'
 import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/Shield'
 import {Loader} from '#/components/Loader'
@@ -73,6 +73,9 @@ export function Verify({config}: any) {
   // Credential flow mutation
   const startCredentialFlow = useStartCredentialFlowMutation()
   const requestAgeProof = useRequestAgeProofMutation()
+
+  // Cache invalidation for verification records
+  const invalidateVerificationRecords = useInvalidateVerificationRecords()
 
   // ===== PHASE 1: INITIAL SETUP - Generate connection invitation =====
   useEffect(() => {
@@ -170,7 +173,7 @@ export function Verify({config}: any) {
       })
       setLoading(false)
 
-      // Create PDS verification record (only once)
+      // Create PDS verification record
       if (
         !hasCreatedPDSRecord.current &&
         credentialData?.presExId &&
@@ -189,6 +192,16 @@ export function Verify({config}: any) {
             agent,
           },
         )
+          .then(() => {
+            // Invalidate verification records cache so UI updates immediately
+            invalidateVerificationRecords()
+          })
+          .catch(err => {
+            logger.error('Failed to invalidate verification records cache', {
+              error: err,
+              credentialType: config.credentialType,
+            })
+          })
       }
     }
 
@@ -229,6 +242,7 @@ export function Verify({config}: any) {
     currentAccount,
     profile,
     agent,
+    invalidateVerificationRecords,
   ])
 
   // ===== PHASE 4: AUTO-EXECUTION - Send proof request when connection becomes active =====

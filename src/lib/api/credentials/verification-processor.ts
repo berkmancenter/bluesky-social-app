@@ -151,4 +151,18 @@ export const VerificationProcessor = {
 
     return new Date(Math.max(...dates.map(d => d.getTime())))
   },
+
+  /**
+   * Extract screen_name from account verification record
+   * Returns the stored screen_name from the credential object
+   */
+  extractScreenNameFromAccountRecord(
+    record: VerificationRecord,
+  ): string | null {
+    try {
+      return record.credential?.screenName || null
+    } catch (error) {
+      return null
+    }
+  },
 }

@@ -25,5 +25,6 @@ export {
   usePersistentProofRequest,
   useProofRecordQuery,
   useProofRecordsQuery,
+  useRequestAccountProofMutation,
   useRequestAgeProofMutation,
 } from './proof-requests'

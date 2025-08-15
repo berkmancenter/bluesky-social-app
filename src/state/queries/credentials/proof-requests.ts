@@ -47,6 +47,34 @@ export function useRequestAgeProofMutation() {
   })
 }
 
+export function useRequestAccountProofMutation() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async ({
+      connectionId,
+      credentialDefinitionId,
+    }: {
+      connectionId: string
+      credentialDefinitionId: string
+    }) => {
+      return await credentialsAPI.requestAccountProof(
+        connectionId,
+        credentialDefinitionId,
+      )
+    },
+    onSuccess: async data => {
+      // Save to storage
+      await saveProofRequestToStorage(data)
+      // Invalidate and refetch proof records
+      queryClient.invalidateQueries({queryKey: RQKEY('list')})
+    },
+    onError: error => {
+      logger.error('Failed to request account proof', {error})
+    },
+  })
+}
+
 export function useProofRecordsQuery() {
   return useQuery({
     queryKey: RQKEY('list'),

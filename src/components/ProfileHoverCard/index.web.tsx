@@ -41,8 +41,7 @@ import * as Pills from '#/components/Pills'
 import {Portal} from '#/components/Portal'
 import {RichText} from '#/components/RichText'
 import {Text} from '#/components/Typography'
-import {useSimpleVerificationState} from '#/components/verification'
-import {VerificationCheck} from '#/components/verification/VerificationCheck'
+import {VerificationBadges} from '#/components/verification/VerificationBadges'
 import {type ProfileHoverCardProps} from './types'
 
 const floatingMiddlewares = [
@@ -456,7 +455,6 @@ function Inner({
     [currentAccount, profile],
   )
   const isLabeler = profile.associated?.labeler
-  const verification = useSimpleVerificationState({profile})
 
   return (
     <View>
@@ -519,20 +517,9 @@ function Inner({
                 moderation.ui('displayName'),
               )}
             </Text>
-            {verification.showBadge && (
-              <View
-                style={[
-                  a.pl_xs,
-                  {
-                    marginTop: -2,
-                  },
-                ]}>
-                <VerificationCheck
-                  width={16}
-                  verifier={verification.role === 'verifier'}
-                />
-              </View>
-            )}
+            <View style={[a.pl_xs, {marginTop: -2}]}>
+              <VerificationBadges profile={profileShadow} size="sm" />
+            </View>
           </View>
 
           <ProfileHeaderHandle profile={profileShadow} disableTaps />

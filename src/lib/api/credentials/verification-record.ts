@@ -35,9 +35,10 @@ export interface VerificationRecord {
 export interface CredentialData {
   uri: string // URL to the proof record
   hash: string // SHA-256 hash of the cryptographic proof
-  type: string[] // ['VerifiableCredential', 'AgeVerification'] etc
-  purpose: string[] // ['ProofOfMajorityAge', 'AccountVerification'] etc
+  type: string[] // ['VerifiableCredential', 'AgeVerification']
+  purpose: string[] // ['ProofOfMajorityAge', 'AccountVerification']
   expirationDate?: string // Optional ISO date string
+  screenName?: string // For account verification: extracted from proof
 }
 
 // Individual verification configurations
@@ -64,6 +65,68 @@ export function getVerificationConfig(
       return ACCOUNT_VERIFICATION_CONFIG
     default:
       throw new Error(`Unsupported verification type: ${type}`)
+  }
+}
+//TODO: Extract all revealed attributes from the proof record that corresponds to the TLS revealed attributes
+/**
+ * Extract screen_name from the proof record for account verification
+ */
+function extractScreenNameFromProof(proofRecord: any): string | undefined {
+  try {
+    // Navigate the proof structure to find revealed attributes
+    const proofData = proofRecord.by_format?.pres
+
+    if (!proofData) {
+      logger.warn(
+        'No proof data found in by_format.pres for screen_name extraction',
+      )
+      return undefined
+    }
+
+    // Look for the proof format (usually anoncreds or similar)
+    const formatKeys = Object.keys(proofData)
+    if (formatKeys.length === 0) {
+      logger.warn(
+        'No format keys found in proof data for screen_name extraction',
+      )
+      return undefined
+    }
+
+    // Get the first format (assuming anoncreds)
+    const formatData = proofData[formatKeys[0]]
+    const revealedAttrs = formatData?.requested_proof?.revealed_attrs
+
+    if (!revealedAttrs) {
+      logger.warn(
+        'No revealed attributes found in proof for screen_name extraction',
+      )
+      return undefined
+    }
+
+    // Look for screen_name in revealed attributes
+    const screenNameAttr = revealedAttrs.screen_name
+    if (!screenNameAttr) {
+      logger.warn('No screen_name attribute found in revealed attributes', {
+        availableAttributes: Object.keys(revealedAttrs),
+      })
+      return undefined
+    }
+
+    // Extract the raw value
+    const rawScreenName = screenNameAttr.raw
+    if (!rawScreenName) {
+      logger.warn('No raw screen_name value found')
+      return undefined
+    }
+
+    logger.info('Successfully extracted screen_name from proof', {
+      screenName: rawScreenName,
+    })
+
+    return rawScreenName.toString()
+  } catch (error) {
+    logger.error('Error extracting screen_name from proof', {error})
+    return undefined
   }
 }
 
@@ -230,6 +293,12 @@ export async function createVerificationRecord(
     params.proofRecord,
   )
 
+  // Extract screen_name for account verification
+  const screenName =
+    params.credentialType === 'account'
+      ? extractScreenNameFromProof(params.proofRecord)
+      : undefined
+
   // Build the verification record
   const record: VerificationRecord = {
     handle: sessionData.currentAccount.handle,
@@ -243,6 +312,7 @@ export async function createVerificationRecord(
       type: config.types,
       purpose: config.purposes,
       expirationDate,
+      screenName, // Include screen_name in credential for account verification
     },
   }
 

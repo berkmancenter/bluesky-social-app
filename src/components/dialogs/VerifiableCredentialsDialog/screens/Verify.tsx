@@ -2,18 +2,21 @@ import {useEffect, useRef} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import {useQueryClient} from '@tanstack/react-query'
 
 import {createVerificationRecord} from '#/lib/api/credentials/verification-record'
-import {AGE_CRED_DEF_ID} from '#/lib/constants'
+import {ACCOUNT_CRED_DEF_ID, AGE_CRED_DEF_ID} from '#/lib/constants'
 import {useCleanError} from '#/lib/hooks/useCleanError'
 import {useCredentialState} from '#/lib/hooks/useCredentialState'
 import {logger} from '#/logger'
 import {
   usePersistentConnection,
   usePersistentProofRequest,
+  useRequestAccountProofMutation,
   useRequestAgeProofMutation,
   useStartCredentialFlowMutation,
 } from '#/state/queries/credentials'
+import {PROFILE_VERIFICATION_RECORDS_QUERY_KEY} from '#/state/queries/credentials/useProfileVerificationStatus'
 import {useInvalidateVerificationRecords} from '#/state/queries/credentials/useVerificationRecordsQuery'
 import {useCurrentAccountProfile} from '#/state/queries/useCurrentAccountProfile'
 import {useAgent, useSession} from '#/state/session'
@@ -73,9 +76,11 @@ export function Verify({config}: any) {
   // Credential flow mutation
   const startCredentialFlow = useStartCredentialFlowMutation()
   const requestAgeProof = useRequestAgeProofMutation()
+  const requestAccountProof = useRequestAccountProofMutation()
 
   // Cache invalidation for verification records
   const invalidateVerificationRecords = useInvalidateVerificationRecords()
+  const queryClient = useQueryClient()
 
   // ===== PHASE 1: INITIAL SETUP - Generate connection invitation =====
   useEffect(() => {
@@ -195,6 +200,19 @@ export function Verify({config}: any) {
           .then(() => {
             // Invalidate verification records cache so UI updates immediately
             invalidateVerificationRecords()
+
+            // Also invalidate profile verification caches for immediate badge updates
+            queryClient.invalidateQueries({
+              queryKey: PROFILE_VERIFICATION_RECORDS_QUERY_KEY,
+            })
+
+            logger.debug(
+              'Invalidated verification caches after successful verification',
+              {
+                credentialType: config.credentialType,
+                userDid: currentAccount?.did,
+              },
+            )
           })
           .catch(err => {
             logger.error('Failed to invalidate verification records cache', {
@@ -243,6 +261,7 @@ export function Verify({config}: any) {
     profile,
     agent,
     invalidateVerificationRecords,
+    queryClient,
   ])
 
   // ===== PHASE 4: AUTO-EXECUTION - Send proof request when connection becomes active =====
@@ -275,9 +294,18 @@ export function Verify({config}: any) {
             presExId: credentialData.presExId,
           })
 
-          const credentialDefinitionId = AGE_CRED_DEF_ID
+          // Determine credential definition and mutation based on type
+          const credentialDefinitionId =
+            config.credentialType === 'age'
+              ? AGE_CRED_DEF_ID
+              : ACCOUNT_CRED_DEF_ID
 
-          const proofResponse = await requestAgeProof.mutateAsync({
+          const proofMutation =
+            config.credentialType === 'age'
+              ? requestAgeProof
+              : requestAccountProof
+
+          const proofResponse = await proofMutation.mutateAsync({
             connectionId: credentialData.connectionId,
             credentialDefinitionId,
           })
@@ -307,6 +335,7 @@ export function Verify({config}: any) {
     serverConnection?.state,
     credentialData,
     requestAgeProof,
+    requestAccountProof,
     _,
     setErrorState,
     updateData,

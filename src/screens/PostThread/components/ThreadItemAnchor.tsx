@@ -57,7 +57,7 @@ import * as Prompt from '#/components/Prompt'
 import {RichText} from '#/components/RichText'
 import * as Skele from '#/components/Skeleton'
 import {Text} from '#/components/Typography'
-import {VerificationCheckButton} from '#/components/verification/VerificationCheckButton'
+import {VerificationBadges} from '#/components/verification/VerificationBadges'
 import {WhoCanReply} from '#/components/WhoCanReply'
 import * as bsky from '#/types/bsky'
 
@@ -349,7 +349,7 @@ const ThreadItemAnchorInner = memo(function ThreadItemAnchorInner({
                   </Text>
 
                   <View style={[{paddingLeft: 3, top: -1}]}>
-                    <VerificationCheckButton profile={authorShadow} size="md" />
+                    <VerificationBadges profile={authorShadow} size="md" />
                   </View>
                 </View>
                 <Text

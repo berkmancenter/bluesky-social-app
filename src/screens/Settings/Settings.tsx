@@ -59,11 +59,7 @@ import {Loader} from '#/components/Loader'
 import * as Menu from '#/components/Menu'
 import * as Prompt from '#/components/Prompt'
 import {Text} from '#/components/Typography'
-import {useFullVerificationState} from '#/components/verification'
-import {
-  shouldShowVerificationCheckButton,
-  VerificationCheckButton,
-} from '#/components/verification/VerificationCheckButton'
+import {VerificationBadges} from '#/components/verification/VerificationBadges'
 import {useActivitySubscriptionsNudged} from '#/storage/hooks/activity-subscriptions-nudged'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'Settings'>
@@ -304,9 +300,7 @@ function ProfilePreview({
   const {gtMobile} = useBreakpoints()
   const shadow = useProfileShadow(profile)
   const moderationOpts = useModerationOpts()
-  const verificationState = useFullVerificationState({
-    profile: shadow,
-  })
+
   const {isActive: live} = useActorStatus(profile)
 
   if (!moderationOpts) return null
@@ -347,16 +341,14 @@ function ProfilePreview({
           ]}>
           {displayName}
         </Text>
-        {shouldShowVerificationCheckButton(verificationState) && (
-          <View
-            style={[
-              {
-                marginTop: platform({web: 8, ios: 8, android: 10}),
-              },
-            ]}>
-            <VerificationCheckButton profile={shadow} size="lg" />
-          </View>
-        )}
+        <View
+          style={[
+            {
+              marginTop: platform({web: 8, ios: 8, android: 10}),
+            },
+          ]}>
+          <VerificationBadges profile={shadow} size="lg" />
+        </View>
       </View>
       <Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_medium]}>
         {sanitizeHandle(profile.handle, '@')}

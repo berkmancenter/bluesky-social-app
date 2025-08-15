@@ -68,7 +68,7 @@ import * as Prompt from '#/components/Prompt'
 import {RichText} from '#/components/RichText'
 import {SubtleWebHover} from '#/components/SubtleWebHover'
 import {Text} from '#/components/Typography'
-import {VerificationCheckButton} from '#/components/verification/VerificationCheckButton'
+import {VerificationBadges} from '#/components/verification/VerificationBadges'
 import {WhoCanReply} from '#/components/WhoCanReply'
 import * as bsky from '#/types/bsky'
 
@@ -416,10 +416,7 @@ let PostThreadItemLoaded = ({
                 </Link>
 
                 <View style={[{paddingLeft: 3, top: -1}]}>
-                  <VerificationCheckButton
-                    profile={shadowedPostAuthor}
-                    size="md"
-                  />
+                  <VerificationBadges profile={shadowedPostAuthor} size="md" />
                 </View>
               </View>
               <Link style={s.flex1} href={authorHref} title={authorTitle}>

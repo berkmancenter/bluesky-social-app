@@ -35,7 +35,7 @@ import {
 import * as Prompt from '#/components/Prompt'
 import {RichText} from '#/components/RichText'
 import {Text} from '#/components/Typography'
-import {VerificationCheckButton} from '#/components/verification/VerificationCheckButton'
+import {VerificationBadges} from '#/components/verification/VerificationBadges'
 import {EditProfileDialog} from './EditProfileDialog'
 import {ProfileHeaderHandle} from './Handle'
 import {ProfileHeaderMetrics} from './Metrics'
@@ -273,7 +273,7 @@ let ProfileHeaderStandard = ({
                     marginTop: platform({ios: 2}),
                   },
                 ]}>
-                <VerificationCheckButton profile={profile} size="lg" />
+                <VerificationBadges profile={profile} size="lg" />
               </View>
             </Text>
           </View>

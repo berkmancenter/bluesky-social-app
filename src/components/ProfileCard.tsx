@@ -33,8 +33,7 @@ import {Link as InternalLink, type LinkProps} from '#/components/Link'
 import * as Pills from '#/components/Pills'
 import {RichText} from '#/components/RichText'
 import {Text} from '#/components/Typography'
-import {useSimpleVerificationState} from '#/components/verification'
-import {VerificationCheck} from '#/components/verification/VerificationCheck'
+import {VerificationBadges} from '#/components/verification/VerificationBadges'
 import type * as bsky from '#/types/bsky'
 
 export function Default({
@@ -206,14 +205,14 @@ export function NameAndHandle({
 }
 
 function InlineNameAndHandle({
-  profile,
+  profile: profileUnshadowed,
   moderationOpts,
 }: {
   profile: bsky.profile.AnyProfileView
   moderationOpts: ModerationOpts
 }) {
   const t = useTheme()
-  const verification = useSimpleVerificationState({profile})
+  const profile = useProfileShadow(profileUnshadowed)
   const moderation = moderateProfile(profile, moderationOpts)
   const name = sanitizeDisplayName(
     profile.displayName || sanitizeHandle(profile.handle),
@@ -233,19 +232,14 @@ function InlineNameAndHandle({
         numberOfLines={1}>
         {forceLTR(name)}
       </Text>
-      {verification.showBadge && (
-        <View
-          style={[
-            a.pl_2xs,
-            a.self_center,
-            {marginTop: platform({default: 0, android: -1})},
-          ]}>
-          <VerificationCheck
-            width={platform({android: 13, default: 12})}
-            verifier={verification.role === 'verifier'}
-          />
-        </View>
-      )}
+      <View
+        style={[
+          a.pl_2xs,
+          a.self_center,
+          {marginTop: platform({default: 0, android: -1})},
+        ]}>
+        <VerificationBadges profile={profile} size="sm" />
+      </View>
       <Text
         emoji
         style={[
@@ -261,18 +255,18 @@ function InlineNameAndHandle({
 }
 
 export function Name({
-  profile,
+  profile: profileUnshadowed,
   moderationOpts,
 }: {
   profile: bsky.profile.AnyProfileView
   moderationOpts: ModerationOpts
 }) {
+  const profile = useProfileShadow(profileUnshadowed)
   const moderation = moderateProfile(profile, moderationOpts)
   const name = sanitizeDisplayName(
     profile.displayName || sanitizeHandle(profile.handle),
     moderation.ui('displayName'),
   )
-  const verification = useSimpleVerificationState({profile})
   return (
     <View style={[a.flex_row, a.align_center]}>
       <Text
@@ -281,14 +275,9 @@ export function Name({
         numberOfLines={1}>
         {name}
       </Text>
-      {verification.showBadge && (
-        <View style={[a.pl_xs]}>
-          <VerificationCheck
-            width={14}
-            verifier={verification.role === 'verifier'}
-          />
-        </View>
-      )}
+      <View style={[a.pl_xs]}>
+        <VerificationBadges profile={profile} size="sm" />
+      </View>
     </View>
   )
 }
@@ -347,9 +336,9 @@ export function Description({
   const profile = useProfileShadow(profileUnshadowed)
   const rt = React.useMemo(() => {
     if (!('description' in profile)) return
-    const rt = new RichTextApi({text: profile.description || ''})
-    rt.detectFacetsWithoutResolution()
-    return rt
+    const richText = new RichTextApi({text: profile.description || ''})
+    richText.detectFacetsWithoutResolution()
+    return richText
   }, [profile])
   if (!rt) return null
   if (

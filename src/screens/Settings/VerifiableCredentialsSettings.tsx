@@ -1,11 +1,12 @@
-import {useState} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {type NativeStackScreenProps} from '@react-navigation/native-stack'
 
+import {type VerificationType} from '#/lib/api/credentials/verification-types'
 import {type CommonNavigatorParams} from '#/lib/routes/types'
 import {logger} from '#/logger'
+import {useVerificationStatus} from '#/state/queries/credentials/useVerificationStatus'
 import * as Toast from '#/view/com/util/Toast'
 import * as SettingsList from '#/screens/Settings/components/SettingsList'
 import {atoms as a, useTheme} from '#/alf'
@@ -13,8 +14,8 @@ import {
   useVerifiableCredentialsDialogControl,
   VerifiableCredentialsDialogScreenID,
 } from '#/components/dialogs/VerifiableCredentialsDialog'
-import {Check_Stroke2_Corner0_Rounded as CheckIcon} from '#/components/icons/Check'
 import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/Shield'
+import {VerifiedCheck} from '#/components/icons/VerifiedCheck'
 import * as Layout from '#/components/Layout'
 import {Text} from '#/components/Typography'
 
@@ -29,13 +30,10 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
   const verifiableCredentialsDialogControl =
     useVerifiableCredentialsDialogControl()
 
-  // Mock state - replace with actual credential status from your API
-  const [credentialStatus, setCredentialStatus] = useState({
-    age: {verified: false, verifiedAt: null},
-    account: {verified: false, verifiedAt: null},
-  })
+  // Persistent state from PDS
+  const {status: credentialStatus, isLoading, actions} = useVerificationStatus()
 
-  const handleVerifyCredential = async (type: 'age' | 'account') => {
+  const handleVerifyCredential = async (type: VerificationType) => {
     try {
       logger.info('VerifiableCredentialsSettings: Starting verification', {
         credentialType: type,
@@ -47,24 +45,18 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
           handleVerificationComplete(type)
         },
       })
-    } catch (error) {
+    } catch (err) {
       logger.error(
         'VerifiableCredentialsSettings: Failed to start verification',
-        {error},
+        {error: err},
       )
       Toast.show(_(msg`Failed to start verification. Please try again.`))
     }
   }
 
-  const handleVerificationComplete = (type: 'age' | 'account') => {
-    // Update the credential status
-    setCredentialStatus(prev => ({
-      ...prev,
-      [type]: {
-        verified: true,
-        verifiedAt: new Date(),
-      },
-    }))
+  const handleVerificationComplete = (type: VerificationType) => {
+    // Refresh data from PDS
+    actions.refreshFromPDS()
 
     Toast.show(_(msg`Verification completed successfully!`))
     logger.info('VerifiableCredentialsSettings: Verification completed', {
@@ -72,7 +64,10 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
     })
   }
 
-  const getCredentialStatusText = (type: 'age' | 'account') => {
+  const getCredentialStatusText = (type: VerificationType) => {
+    if (isLoading) {
+      return _(msg`Loading...`)
+    }
     const status = credentialStatus[type]
     if (status.verified) {
       return _(msg`Verified`)
@@ -83,7 +78,7 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
   const getCredentialStatusColor = (type: 'age' | 'account') => {
     const status = credentialStatus[type]
     return status.verified
-      ? t.palette.positive_500
+      ? t.palette.positive_700
       : t.atoms.text_contrast_medium.color
   }
 
@@ -111,7 +106,7 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
                 {getCredentialStatusText('age')}
               </Text>
               {credentialStatus.age.verified && (
-                <CheckIcon size="sm" style={{color: t.palette.positive_500}} />
+                <VerifiedCheck size="sm" fill={t.palette.positive_700} />
               )}
             </View>
           </SettingsList.Item>
@@ -142,7 +137,7 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
                 {getCredentialStatusText('account')}
               </Text>
               {credentialStatus.account.verified && (
-                <CheckIcon size="sm" style={{color: t.palette.positive_500}} />
+                <VerifiedCheck size="sm" fill={t.palette.positive_700} />
               )}
             </View>
           </SettingsList.Item>

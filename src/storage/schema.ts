@@ -25,3 +25,18 @@ export type CredentialConnection = {
   createdAt: string
   updatedAt: string
 }
+
+export type ProofRequest = {
+  presExId: string
+  connectionId: string
+  credentialDefinitionId: string
+  status:
+    | 'request-sent'
+    | 'request-received'
+    | 'presentation-sent'
+    | 'presentation-received'
+    | 'verified'
+    | 'done'
+  createdAt: string
+  updatedAt: string
+}

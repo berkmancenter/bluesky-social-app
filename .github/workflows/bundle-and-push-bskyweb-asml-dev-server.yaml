@@ -1,0 +1,39 @@
+name: build-and-push-bskyweb-asml-dev-server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    environment: development
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Prepare SSH key for rsync
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build internationalization
+        run: yarn intl:build
+
+      - name: Build web
+        run: yarn build-web
+
+      - name: Upload built files with rsync
+        run: |
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" web-build/ ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }}:${{ vars.SFTP_PATH }}

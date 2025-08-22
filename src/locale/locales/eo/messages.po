@@ -90,18 +90,18 @@ msgstr "{0, plural, one {# nelegita elemento} other {# nelegitaj elementoj}}"
 msgid "{0, plural, one {#mo} other {#mo}}"
 msgstr "{0, plural, one {#mo} other {#mo}}"
 
-#: src/components/ProfileHoverCard/index.web.tsx:442
+#: src/components/ProfileHoverCard/index.web.tsx:441
 #: src/screens/Profile/Header/Metrics.tsx:22
 msgid "{0, plural, one {follower} other {followers}}"
 msgstr "{0, plural, one {sekvanto} other {sekvantoj}}"
 
-#: src/components/ProfileHoverCard/index.web.tsx:446
+#: src/components/ProfileHoverCard/index.web.tsx:445
 #: src/screens/Profile/Header/Metrics.tsx:26
 msgid "{0, plural, one {following} other {following}}"
 msgstr "{0, plural, one {sekvata} other {sekvataj}}"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:468
-#: src/view/com/post-thread/PostThreadItem.tsx:541
+#: src/view/com/post-thread/PostThreadItem.tsx:538
 msgid "{0, plural, one {like} other {likes}}"
 msgstr "{0, plural, one {ŝato} other {ŝatoj}}"
 
@@ -110,12 +110,12 @@ msgid "{0, plural, one {post} other {posts}}"
 msgstr "{0, plural, one {afiŝo} other {afiŝoj}}"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:452
-#: src/view/com/post-thread/PostThreadItem.tsx:525
+#: src/view/com/post-thread/PostThreadItem.tsx:522
 msgid "{0, plural, one {quote} other {quotes}}"
 msgstr "{0, plural, one {citaĵo} other {citaĵoj}}"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:434
-#: src/view/com/post-thread/PostThreadItem.tsx:507
+#: src/view/com/post-thread/PostThreadItem.tsx:504
 msgid "{0, plural, one {repost} other {reposts}}"
 msgstr "{0, plural, one {reafiŝo} other {reafiŝoj}}"
 
@@ -127,6 +127,10 @@ msgstr "{0, plural, one {{1} afiŝo} other {{1} afiŝoj}}"
 #: src/screens/StarterPack/StarterPackScreen.tsx:490
 msgid "{0, plural, other {# people have}} used this starter pack!"
 msgstr "{0, plural, one {# homo}other {# homoj}} uzis ĉi tiun startpakon!"
+
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:406
+msgid "{0}"
+msgstr ""
 
 #. Pattern: {wordValue} in tags
 #: src/components/dialogs/MutedWords.tsx:475
@@ -369,7 +373,7 @@ msgstr "{firstAuthorName} registriĝis kun via startpako"
 msgid "{firstAuthorName} verified you"
 msgstr "{firstAuthorName} konfirmis vin"
 
-#: src/components/ProfileHoverCard/index.web.tsx:570
+#: src/components/ProfileHoverCard/index.web.tsx:557
 #: src/screens/Profile/Header/Metrics.tsx:49
 msgid "{following} following"
 msgstr "{following} sekvataj"
@@ -424,6 +428,14 @@ msgstr "{userName} estas fidata konfirmanto"
 #: src/components/verification/VerificationsDialog.tsx:67
 msgid "{userName} is verified"
 msgstr "{userName} estas konfirmita"
+
+#: src/components/verification/AccountVerificationDialog.tsx:58
+msgid "{userName}'s account verification"
+msgstr ""
+
+#: src/components/verification/AgeVerificationDialog.tsx:57
+msgid "{userName}'s age verification"
+msgstr ""
 
 #. Possessive, meaning "the verifications of {userName}"
 #: src/components/verification/VerificationsDialog.tsx:69
@@ -506,10 +518,10 @@ msgstr "Nova konfirmada metodo"
 msgid "A screenshot of a profile page with a bell icon next to the follow button, indicating the new activity notifications feature."
 msgstr "Ekrankopio montranta paĝon kun sonorila piktogramo apud la sekvi-butono, kio estas la nova funkcio - agadaj sciigoj."
 
-#: src/Navigation.tsx:509
+#: src/Navigation.tsx:510
 #: src/screens/Settings/AboutSettings.tsx:75
-#: src/screens/Settings/Settings.tsx:235
-#: src/screens/Settings/Settings.tsx:238
+#: src/screens/Settings/Settings.tsx:240
+#: src/screens/Settings/Settings.tsx:243
 msgid "About"
 msgstr "Pri"
 
@@ -528,20 +540,20 @@ msgid "Accept Request"
 msgstr "Akcepti peton"
 
 #: src/screens/Settings/AccessibilitySettings.tsx:44
-#: src/screens/Settings/Settings.tsx:211
-#: src/screens/Settings/Settings.tsx:214
+#: src/screens/Settings/Settings.tsx:216
+#: src/screens/Settings/Settings.tsx:219
 msgid "Accessibility"
 msgstr "Alirebleco"
 
-#: src/Navigation.tsx:368
+#: src/Navigation.tsx:369
 msgid "Accessibility Settings"
 msgstr "Alireblecaj agordoj"
 
-#: src/Navigation.tsx:384
+#: src/Navigation.tsx:385
 #: src/screens/Login/LoginForm.tsx:194
 #: src/screens/Settings/AccountSettings.tsx:48
+#: src/screens/Settings/Settings.tsx:162
 #: src/screens/Settings/Settings.tsx:165
-#: src/screens/Settings/Settings.tsx:168
 msgid "Account"
 msgstr "Konto"
 
@@ -572,11 +584,11 @@ msgstr "Konto silentigita"
 msgid "Account Muted by List"
 msgstr "Konto silentigita de listo"
 
-#: src/screens/Settings/Settings.tsx:529
+#: src/screens/Settings/Settings.tsx:530
 msgid "Account options"
 msgstr "Kontaj opcioj"
 
-#: src/screens/Settings/Settings.tsx:565
+#: src/screens/Settings/Settings.tsx:566
 msgid "Account removed from quick access"
 msgstr "Konto forigita el la rapidatingo"
 
@@ -597,6 +609,11 @@ msgctxt "toast"
 msgid "Account unmuted"
 msgstr "Konto malsilentigita"
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:352
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:129
+msgid "Account Verification"
+msgstr ""
+
 #: src/components/verification/VerifierDialog.tsx:96
 msgid "Accounts with a scalloped blue check mark <0><1/></0> can verify others. These trusted verifiers are selected by Bluesky."
 msgstr "Kontoj kun gravurita blua kontrolmarko<0><1/></0>povas kontroli aliulojn. Tiuj fidataj konfirmantoj estas elektataj de Bluesky."
@@ -607,7 +624,7 @@ msgstr "Kontoj kun gravurita blua kontrolmarko<0><1/></0>povas kontroli aliulojn
 msgid "Activity from others"
 msgstr "Agado de aliuloj"
 
-#: src/Navigation.tsx:477
+#: src/Navigation.tsx:478
 msgid "Activity notifications"
 msgstr "Agadaj sciigoj"
 
@@ -658,8 +675,8 @@ msgstr "Aldoni alternativan tekston"
 msgid "Add alt text (optional)"
 msgstr "Aldoni alternativan tekston (nedeviga)"
 
-#: src/screens/Settings/Settings.tsx:469
-#: src/screens/Settings/Settings.tsx:472
+#: src/screens/Settings/Settings.tsx:470
+#: src/screens/Settings/Settings.tsx:473
 #: src/view/shell/desktop/LeftNav.tsx:260
 #: src/view/shell/desktop/LeftNav.tsx:264
 msgid "Add another account"
@@ -786,6 +803,15 @@ msgstr "Etikedoj pri poradolta enhavo"
 #: src/screens/Moderation/index.tsx:418
 msgid "Advanced"
 msgstr "Altnivelaj"
+
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:350
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:101
+msgid "Age Verification"
+msgstr ""
+
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:369
+msgid "Age verification completed successfully!"
+msgstr ""
 
 #: src/components/dialogs/EmailDialog/screens/Update.tsx:223
 msgid "alice@example.com"
@@ -943,8 +969,8 @@ msgstr "Problemo okazis dum provo malfermi la babilejon"
 
 #: src/components/hooks/useFollowMethods.ts:35
 #: src/components/hooks/useFollowMethods.ts:50
-#: src/components/ProfileCard.tsx:451
-#: src/components/ProfileCard.tsx:472
+#: src/components/ProfileCard.tsx:440
+#: src/components/ProfileCard.tsx:461
 #: src/view/com/profile/FollowButton.tsx:38
 #: src/view/com/profile/FollowButton.tsx:48
 msgid "An issue occurred, please try again."
@@ -995,7 +1021,7 @@ msgstr "Ĉiu povas interagi"
 msgid "Anyone who follows me"
 msgstr "Ĉiu kiu sekvas min"
 
-#: src/Navigation.tsx:517
+#: src/Navigation.tsx:518
 #: src/screens/Settings/AppIconSettings/index.tsx:67
 #: src/screens/Settings/AppIconSettings/SettingsListItem.tsx:18
 #: src/screens/Settings/AppIconSettings/SettingsListItem.tsx:23
@@ -1032,7 +1058,7 @@ msgstr "Nomoj de apaj pasvortoj devas havi longon de almenaŭ 4 signoj"
 msgid "App passwords"
 msgstr "Apaj pasvortoj"
 
-#: src/Navigation.tsx:336
+#: src/Navigation.tsx:337
 #: src/screens/Settings/AppPasswords.tsx:51
 msgid "App Passwords"
 msgstr "Apaj pasvortoj"
@@ -1068,10 +1094,10 @@ msgstr "Apelacii pri suspendo"
 msgid "Appeal this decision"
 msgstr "Apelacii pri ĉi tiu decido"
 
-#: src/Navigation.tsx:376
+#: src/Navigation.tsx:377
 #: src/screens/Settings/AppearanceSettings.tsx:88
-#: src/screens/Settings/Settings.tsx:203
-#: src/screens/Settings/Settings.tsx:206
+#: src/screens/Settings/Settings.tsx:208
+#: src/screens/Settings/Settings.tsx:211
 msgid "Appearance"
 msgstr "Aspekto"
 
@@ -1081,14 +1107,14 @@ msgid "Apply default recommended feeds"
 msgstr "Apliki defaŭltajn rekomenditajn fluojn"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:634
-#: src/view/com/post-thread/PostThreadItem.tsx:955
+#: src/view/com/post-thread/PostThreadItem.tsx:952
 msgid "Archived from {0}"
 msgstr "Arkivigita de {0}"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:603
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:642
-#: src/view/com/post-thread/PostThreadItem.tsx:924
-#: src/view/com/post-thread/PostThreadItem.tsx:963
+#: src/view/com/post-thread/PostThreadItem.tsx:921
+#: src/view/com/post-thread/PostThreadItem.tsx:960
 msgid "Archived post"
 msgstr "Arkivigita afiŝo"
 
@@ -1288,7 +1314,7 @@ msgstr "Blokita"
 msgid "Blocked accounts"
 msgstr "Blokitaj kontoj"
 
-#: src/Navigation.tsx:177
+#: src/Navigation.tsx:178
 #: src/view/screens/ModerationBlockedAccounts.tsx:104
 msgid "Blocked Accounts"
 msgstr "Blokitaj kontoj"
@@ -1328,7 +1354,7 @@ msgid "Bluesky"
 msgstr "Bluesky"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:659
-#: src/view/com/post-thread/PostThreadItem.tsx:980
+#: src/view/com/post-thread/PostThreadItem.tsx:977
 msgid "Bluesky cannot confirm the authenticity of the claimed date."
 msgstr "Bluesky ne povas konfirmi la aŭtentecon de la donita dato."
 
@@ -1486,7 +1512,7 @@ msgstr "Fotilo"
 #: src/screens/Settings/AppIconSettings/index.tsx:225
 #: src/screens/Settings/components/ChangeHandleDialog.tsx:78
 #: src/screens/Settings/components/ChangeHandleDialog.tsx:85
-#: src/screens/Settings/Settings.tsx:280
+#: src/screens/Settings/Settings.tsx:285
 #: src/screens/Takendown.tsx:99
 #: src/screens/Takendown.tsx:102
 #: src/view/com/composer/Composer.tsx:960
@@ -1597,7 +1623,7 @@ msgid "Changes saved"
 msgstr "Ŝanĝoj konservitaj"
 
 #: src/lib/hooks/useNotificationHandler.ts:91
-#: src/Navigation.tsx:534
+#: src/Navigation.tsx:535
 #: src/view/shell/bottom-bar/BottomBar.tsx:221
 #: src/view/shell/desktop/LeftNav.tsx:553
 #: src/view/shell/Drawer.tsx:455
@@ -1623,7 +1649,7 @@ msgctxt "toast"
 msgid "Chat muted"
 msgstr "Babilejo silentigita"
 
-#: src/Navigation.tsx:544
+#: src/Navigation.tsx:545
 #: src/screens/Messages/components/InboxPreview.tsx:24
 msgid "Chat request inbox"
 msgstr "Ricevujo de babilpetoj"
@@ -1634,7 +1660,7 @@ msgid "Chat requests"
 msgstr "Babilpetoj"
 
 #: src/components/dms/ConvoMenu.tsx:75
-#: src/Navigation.tsx:539
+#: src/Navigation.tsx:540
 #: src/screens/Messages/ChatList.tsx:341
 msgid "Chat settings"
 msgstr "Agordoj de babilejo"
@@ -1706,11 +1732,11 @@ msgstr "Elektu vian pasvorton"
 msgid "Choose your username"
 msgstr "Elektu vian uzantnomon"
 
-#: src/screens/Settings/Settings.tsx:447
+#: src/screens/Settings/Settings.tsx:448
 msgid "Clear all storage data"
 msgstr "Forigi ĉiujn konservitajn datumojn"
 
-#: src/screens/Settings/Settings.tsx:449
+#: src/screens/Settings/Settings.tsx:450
 msgid "Clear all storage data (restart after this)"
 msgstr "Forigi ĉiujn konservitajn datumojn (restartigu poste)"
 
@@ -1776,6 +1802,8 @@ msgstr "🐮 Dek bovinoj 🐮"
 #: src/components/ProgressGuide/FollowDialog.tsx:386
 #: src/components/StarterPack/Wizard/WizardEditListDialog.tsx:117
 #: src/components/StarterPack/Wizard/WizardEditListDialog.tsx:123
+#: src/components/verification/AccountVerificationDialog.tsx:160
+#: src/components/verification/AgeVerificationDialog.tsx:147
 #: src/components/verification/VerificationsDialog.tsx:144
 #: src/components/verification/VerifierDialog.tsx:144
 #: src/components/WhoCanReply.tsx:200
@@ -1799,12 +1827,14 @@ msgid "Close bottom drawer"
 msgstr "Fermi la suban flankmenuon"
 
 #: src/components/dialogs/GifSelect.tsx:276
+#: src/components/verification/AccountVerificationDialog.tsx:152
+#: src/components/verification/AgeVerificationDialog.tsx:139
 #: src/components/verification/VerificationsDialog.tsx:136
 #: src/components/verification/VerifierDialog.tsx:136
 msgid "Close dialog"
 msgstr "Fermi la dialogujon"
 
-#: src/view/shell/index.web.tsx:87
+#: src/view/shell/index.web.tsx:89
 msgid "Close drawer menu"
 msgstr "Fermi la flankmenuon"
 
@@ -1879,7 +1909,7 @@ msgstr "Komedio"
 msgid "Comics"
 msgstr "Komiksoj"
 
-#: src/Navigation.tsx:326
+#: src/Navigation.tsx:327
 #: src/view/screens/CommunityGuidelines.tsx:34
 msgid "Community Guidelines"
 msgstr "Komunumaj gvidnormoj"
@@ -1961,12 +1991,12 @@ msgstr "Kontakti subtenejon"
 msgid "Content & Media"
 msgstr "Enhavo kaj aŭdvidaĵoj"
 
-#: src/screens/Settings/Settings.tsx:195
-#: src/screens/Settings/Settings.tsx:198
+#: src/screens/Settings/Settings.tsx:200
+#: src/screens/Settings/Settings.tsx:203
 msgid "Content and media"
 msgstr "Enhavo kaj aŭdvidaĵoj"
 
-#: src/Navigation.tsx:493
+#: src/Navigation.tsx:494
 msgid "Content and Media"
 msgstr "Enhavo kaj aŭdvidaĵoj"
 
@@ -2157,7 +2187,7 @@ msgstr "Kopii QR-kodon"
 msgid "Copy TXT record value"
 msgstr "Kopii la valoron de la TXT-rikordo"
 
-#: src/Navigation.tsx:331
+#: src/Navigation.tsx:332
 #: src/view/screens/CopyrightPolicy.tsx:31
 msgid "Copyright Policy"
 msgstr "Regularo pri kopirajto"
@@ -2201,7 +2231,7 @@ msgstr "Krei QR-kodon por startpako"
 
 #: src/components/StarterPack/ProfileStarterPacks.tsx:178
 #: src/components/StarterPack/ProfileStarterPacks.tsx:287
-#: src/Navigation.tsx:574
+#: src/Navigation.tsx:575
 msgid "Create a starter pack"
 msgstr "Krei startpakon"
 
@@ -2260,6 +2290,10 @@ msgstr "Kreita {0}"
 msgid "Creator has been blocked"
 msgstr "La kreinto estis blokita"
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:354
+msgid "Credential Verification"
+msgstr ""
+
 #: src/screens/Onboarding/index.tsx:26
 #: src/screens/Onboarding/state.ts:99
 msgid "Culture"
@@ -2312,7 +2346,7 @@ msgstr "Naskiĝdato"
 msgid "Deactivate account"
 msgstr "Malaktivigi konton"
 
-#: src/screens/Settings/Settings.tsx:412
+#: src/screens/Settings/Settings.tsx:413
 msgid "Debug Moderation"
 msgstr "Sencimiga kontrolo"
 
@@ -2361,7 +2395,7 @@ msgstr "Ĉu forigi apan pasvorton?"
 msgid "Delete chat"
 msgstr "Forigi babilejon"
 
-#: src/screens/Settings/Settings.tsx:419
+#: src/screens/Settings/Settings.tsx:420
 msgid "Delete chat declaration record"
 msgstr "Forigi babilan deklaro-rikordon"
 
@@ -2470,8 +2504,8 @@ msgctxt "toast"
 msgid "Developer mode enabled"
 msgstr "Programista reĝimo ŝaltita"
 
-#: src/screens/Settings/Settings.tsx:262
-#: src/screens/Settings/Settings.tsx:265
+#: src/screens/Settings/Settings.tsx:267
+#: src/screens/Settings/Settings.tsx:270
 msgid "Developer options"
 msgstr "Programistaj opcioj"
 
@@ -2613,6 +2647,10 @@ msgstr "Domajno konfirmita!"
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:368
 msgid "Don't have a code or need a new one? <0>Click here.</0>"
 msgstr "Ĉu vi ne havas kodon aŭ bezonas novan? <0>Alklaku ĉi tie.</0>"
+
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:465
+msgid "Don't have a wallet? You'll need to set one up first to use verifiable credentials."
+msgstr ""
 
 #: src/components/dialogs/EmailDialog/components/ResendEmailText.tsx:37
 msgid "Don't see an email? <0>Click here to resend.</0>"
@@ -2768,7 +2806,7 @@ msgstr "Redakti tujelsendan statuson"
 msgid "Edit Moderation List"
 msgstr "Redakti la kontrol-liston"
 
-#: src/Navigation.tsx:341
+#: src/Navigation.tsx:342
 #: src/view/screens/Feeds.tsx:518
 msgid "Edit My Feeds"
 msgstr "Redakti miajn fluojn"
@@ -2810,7 +2848,7 @@ msgstr "Redakti liston de uzantoj"
 msgid "Edit who can reply"
 msgstr "Elekti kiu povas respondi"
 
-#: src/Navigation.tsx:579
+#: src/Navigation.tsx:580
 msgid "Edit your starter pack"
 msgstr "Redakti vian startpakon"
 
@@ -3035,6 +3073,10 @@ msgstr "Eraro:"
 msgid "Error: {error}"
 msgstr "Eraro: {error}"
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:366
+msgid "Establishing connection and sending verification request..."
+msgstr ""
+
 #: src/components/dialogs/PostInteractionSettingsDialog.tsx:398
 msgid "Everybody"
 msgstr "Ĉiuj"
@@ -3139,6 +3181,11 @@ msgstr "Eksvalidiĝas je {0}"
 msgid "Expires in {0} at {1}"
 msgstr "Eksvalidiĝos post {0} je {1}"
 
+#: src/components/verification/AccountVerificationDialog.tsx:102
+#: src/components/verification/AgeVerificationDialog.tsx:101
+msgid "Expires:"
+msgstr ""
+
 #: src/lib/moderation/useGlobalLabelStrings.ts:47
 #: src/lib/moderation/useGlobalLabelStrings.ts:51
 msgid "Explicit or potentially disturbing media."
@@ -3148,7 +3195,7 @@ msgstr "Poradolta aŭ maltrankviliga aŭdvidaĵo."
 msgid "Explicit sexual images."
 msgstr "Detalaj seksumaj bildoj."
 
-#: src/Navigation.tsx:736
+#: src/Navigation.tsx:742
 #: src/screens/Search/Shell.tsx:307
 #: src/view/shell/desktop/LeftNav.tsx:635
 #: src/view/shell/Drawer.tsx:403
@@ -3179,7 +3226,7 @@ msgstr "Eksteraj aŭdvidaĵoj"
 msgid "External media may allow websites to collect information about you and your device. No information is sent or requested until you press the \"play\" button."
 msgstr "Eksteraj aŭdvidaĵoj eblas permesi al retejoj kolekti informojn pri vi kaj via aparato. Neniu informo estos sendota aŭ postulota antaŭ vi premos la butonon \"ludi\"."
 
-#: src/Navigation.tsx:360
+#: src/Navigation.tsx:361
 #: src/screens/Settings/ExternalMediaPreferences.tsx:34
 msgid "External Media Preferences"
 msgstr "Preferoj pri eksteraj aŭdvidaĵoj"
@@ -3232,6 +3279,10 @@ msgstr "Malsukcesis forigi afiŝon, bonvolu reprovi"
 #: src/screens/StarterPack/StarterPackScreen.tsx:722
 msgid "Failed to delete starter pack"
 msgstr "Malsukcesis forigi startpakon"
+
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:112
+msgid "Failed to generate connection invitation, please try again."
+msgstr ""
 
 #: src/screens/Messages/ChatList.tsx:244
 #: src/screens/Messages/Inbox.tsx:187
@@ -3322,6 +3373,14 @@ msgstr "Malsukcesis sendi"
 msgid "Failed to send email, please try again."
 msgstr "Malsukcesis sendi retmesaĝon, bonvolu reprovi."
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:326
+msgid "Failed to send proof request, please try again."
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:53
+msgid "Failed to start verification. Please try again."
+msgstr ""
+
 #: src/components/moderation/LabelsOnMeDialog.tsx:254
 #: src/screens/Messages/components/ChatDisabled.tsx:87
 msgid "Failed to submit appeal, please try again."
@@ -3367,7 +3426,7 @@ msgstr "Malsukcesis konfirmi retpoŝtadreson, bonvolu reprovi."
 msgid "Failed to verify handle. Please try again."
 msgstr "La aŭtentikigo de via identigilo malsukcesis. Bonvolu reprovi."
 
-#: src/Navigation.tsx:276
+#: src/Navigation.tsx:277
 msgid "Feed"
 msgstr "Fluo"
 
@@ -3396,7 +3455,7 @@ msgctxt "toast"
 msgid "Feedback sent!"
 msgstr "Prikomento sendita!"
 
-#: src/Navigation.tsx:559
+#: src/Navigation.tsx:560
 #: src/screens/Search/SearchResults.tsx:68
 #: src/screens/StarterPack/StarterPackScreen.tsx:190
 #: src/view/screens/Feeds.tsx:511
@@ -3497,9 +3556,9 @@ msgid "Flexible"
 msgstr "Fleksebla"
 
 #. User is not following this account, click to follow
-#: src/components/ProfileCard.tsx:484
-#: src/components/ProfileHoverCard/index.web.tsx:494
-#: src/components/ProfileHoverCard/index.web.tsx:505
+#: src/components/ProfileCard.tsx:473
+#: src/components/ProfileHoverCard/index.web.tsx:492
+#: src/components/ProfileHoverCard/index.web.tsx:503
 #: src/screens/Profile/Header/ProfileHeaderStandard.tsx:245
 #: src/screens/VideoFeed/index.tsx:850
 #: src/view/com/post-thread/PostThreadFollowBtn.tsx:131
@@ -3565,7 +3624,7 @@ msgstr "Sekvata de <0>{0}</0> kaj <1>{1}</1>"
 msgid "Followed by <0>{0}</0>, <1>{1}</1>, and {2, plural, one {# other} other {# others}}"
 msgstr "Sekvata de <0>{0}</0>, <1>{1}</1>, kaj {2, plural, one {# alia} other {# aliaj}}"
 
-#: src/Navigation.tsx:230
+#: src/Navigation.tsx:231
 msgid "Followers of @{0} that you know"
 msgstr "Sekvantoj de @{0}, kiujn vi konas"
 
@@ -3575,9 +3634,9 @@ msgid "Followers you know"
 msgstr "Sekvantoj, kiujn vi konas"
 
 #. User is following this account, click to unfollow
-#: src/components/ProfileCard.tsx:478
-#: src/components/ProfileHoverCard/index.web.tsx:493
-#: src/components/ProfileHoverCard/index.web.tsx:504
+#: src/components/ProfileCard.tsx:467
+#: src/components/ProfileHoverCard/index.web.tsx:491
+#: src/components/ProfileHoverCard/index.web.tsx:502
 #: src/screens/Profile/Header/ProfileHeaderStandard.tsx:241
 #: src/screens/VideoFeed/index.tsx:848
 #: src/view/com/post-thread/PostThreadFollowBtn.tsx:134
@@ -3586,7 +3645,7 @@ msgstr "Sekvantoj, kiujn vi konas"
 msgid "Following"
 msgstr "Sekvas"
 
-#: src/components/ProfileCard.tsx:441
+#: src/components/ProfileCard.tsx:430
 #: src/screens/Profile/Header/ProfileHeaderStandard.tsx:89
 msgid "Following {0}"
 msgstr "Sekvas {0}"
@@ -3600,7 +3659,7 @@ msgstr "Sekvas {handle}"
 msgid "Following feed preferences"
 msgstr "Preferoj de la fluo pri sekvatoj"
 
-#: src/Navigation.tsx:347
+#: src/Navigation.tsx:348
 #: src/screens/Settings/FollowingFeedPreferences.tsx:56
 msgid "Following Feed Preferences"
 msgstr "Preferoj de la fluo pri sekvatoj"
@@ -3878,6 +3937,10 @@ msgstr "Identigilo ŝanĝita!"
 msgid "Handle too long. Please try a shorter one."
 msgstr "Tiu identigilo tro longas. Bonvolu provi malpli longan."
 
+#: src/components/verification/AccountVerificationDialog.tsx:112
+msgid "Handle:"
+msgstr ""
+
 #: src/screens/Settings/AccessibilitySettings.tsx:85
 msgid "Haptics"
 msgstr "Tuŝ-retrokuplado"
@@ -3887,7 +3950,7 @@ msgstr "Tuŝ-retrokuplado"
 msgid "Harassment, trolling, or intolerance"
 msgstr "Molestado, trolado aŭ netoleremo"
 
-#: src/Navigation.tsx:524
+#: src/Navigation.tsx:525
 msgid "Hashtag"
 msgstr "Kradvorto"
 
@@ -3904,8 +3967,8 @@ msgstr "Ĉu vi havas kodon? <0>Alklaku ĉi tie.</0>"
 msgid "Having trouble?"
 msgstr "Ĉu vi havas problemon?"
 
-#: src/screens/Settings/Settings.tsx:227
-#: src/screens/Settings/Settings.tsx:231
+#: src/screens/Settings/Settings.tsx:232
+#: src/screens/Settings/Settings.tsx:236
 #: src/view/shell/desktop/RightNav.tsx:120
 #: src/view/shell/desktop/RightNav.tsx:121
 #: src/view/shell/Drawer.tsx:370
@@ -4044,8 +4107,8 @@ msgstr "Hmmmm, ni ne povis ŝargi tiun kontrol-servon."
 msgid "Hold up! We’re gradually giving access to video, and you’re still waiting in line. Check back soon!"
 msgstr "Momenton! Ni iom post iom donas aliron al la videaĵo, kaj vi ankoraŭ atendas en vico. Rekontrolu baldaŭ!"
 
-#: src/Navigation.tsx:731
-#: src/Navigation.tsx:751
+#: src/Navigation.tsx:737
+#: src/Navigation.tsx:757
 #: src/view/shell/bottom-bar/BottomBar.tsx:178
 #: src/view/shell/desktop/LeftNav.tsx:617
 #: src/view/shell/Drawer.tsx:429
@@ -4370,13 +4433,13 @@ msgstr "Etikedoj sur via enhavo"
 msgid "Language selection"
 msgstr "Lingva elekto"
 
-#: src/Navigation.tsx:203
+#: src/Navigation.tsx:204
 msgid "Language Settings"
 msgstr "Lingvaj agordoj"
 
 #: src/screens/Settings/LanguageSettings.tsx:78
-#: src/screens/Settings/Settings.tsx:219
-#: src/screens/Settings/Settings.tsx:222
+#: src/screens/Settings/Settings.tsx:224
+#: src/screens/Settings/Settings.tsx:227
 msgid "Languages"
 msgstr "Lingvoj"
 
@@ -4514,7 +4577,7 @@ msgstr "Ŝatu 10 afiŝojn"
 msgid "Like 10 posts to train the Discover feed"
 msgstr "Ŝatu 10 afiŝojn por trejni la fluon Discover"
 
-#: src/Navigation.tsx:437
+#: src/Navigation.tsx:438
 msgid "Like notifications"
 msgstr "Sciigoj pri ŝatoj"
 
@@ -4526,8 +4589,8 @@ msgstr "Ŝati ĉi tiun fluon"
 msgid "Like this labeler"
 msgstr "Ŝati ĉi tiun etikedilon"
 
-#: src/Navigation.tsx:281
-#: src/Navigation.tsx:286
+#: src/Navigation.tsx:282
+#: src/Navigation.tsx:287
 msgid "Liked by"
 msgstr "Ŝatata de"
 
@@ -4562,7 +4625,7 @@ msgstr "Ŝatoj"
 msgid "Likes of your reposts"
 msgstr "Ŝatoj de viaj reafiŝoj"
 
-#: src/Navigation.tsx:461
+#: src/Navigation.tsx:462
 msgid "Likes of your reposts notifications"
 msgstr "Sciigoj pri ŝatoj de viaj reafiŝoj"
 
@@ -4578,7 +4641,7 @@ msgstr "Ŝatoj de ĉi tiu afiŝo"
 msgid "Linear"
 msgstr "Linie"
 
-#: src/Navigation.tsx:236
+#: src/Navigation.tsx:237
 msgid "List"
 msgstr "Listo"
 
@@ -4636,7 +4699,7 @@ msgctxt "toast"
 msgid "List unmuted"
 msgstr "Listo malsilentigita"
 
-#: src/Navigation.tsx:157
+#: src/Navigation.tsx:158
 #: src/view/screens/Lists.tsx:65
 #: src/view/screens/Profile.tsx:224
 #: src/view/screens/Profile.tsx:232
@@ -4685,11 +4748,12 @@ msgstr "Ŝargi novajn sciigojn"
 msgid "Load new posts"
 msgstr "Ŝargi novajn afiŝojn"
 
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:69
 #: src/view/com/composer/text-input/mobile/Autocomplete.tsx:61
 msgid "Loading..."
 msgstr "Ŝargado..."
 
-#: src/Navigation.tsx:306
+#: src/Navigation.tsx:307
 msgid "Log"
 msgstr "Protokolo"
 
@@ -4780,7 +4844,7 @@ msgstr "Aŭdvidaĵoj"
 msgid "Media that may be disturbing or inappropriate for some audiences."
 msgstr "Aŭdvidaĵoj, kiuj povas esti maltrankviligaj aŭ nekonvenaj por kelkaj spektantoj."
 
-#: src/Navigation.tsx:421
+#: src/Navigation.tsx:422
 msgid "Mention notifications"
 msgstr "Sciigoj pri mencioj"
 
@@ -4837,7 +4901,7 @@ msgstr "Mesaĝo tro longas"
 msgid "Message options"
 msgstr "Opcioj de mesaĝo"
 
-#: src/Navigation.tsx:746
+#: src/Navigation.tsx:752
 msgid "Messages"
 msgstr "Mesaĝoj"
 
@@ -4846,7 +4910,7 @@ msgctxt "Name of app icon variant"
 msgid "Midnight"
 msgstr "Noktomezo"
 
-#: src/Navigation.tsx:485
+#: src/Navigation.tsx:486
 msgid "Miscellaneous notifications"
 msgstr "Sciigoj aliaj"
 
@@ -4860,10 +4924,10 @@ msgstr "Trompa konto"
 msgid "Misleading Post"
 msgstr "Trompa afiŝo"
 
-#: src/Navigation.tsx:162
+#: src/Navigation.tsx:163
 #: src/screens/Moderation/index.tsx:93
+#: src/screens/Settings/Settings.tsx:176
 #: src/screens/Settings/Settings.tsx:179
-#: src/screens/Settings/Settings.tsx:182
 msgid "Moderation"
 msgstr "Kontrolado"
 
@@ -4899,7 +4963,7 @@ msgstr "Kontrol-listo ĝisdatigita"
 msgid "Moderation lists"
 msgstr "Kontrol-listoj"
 
-#: src/Navigation.tsx:167
+#: src/Navigation.tsx:168
 #: src/view/screens/ModerationModlists.tsx:65
 msgid "Moderation Lists"
 msgstr "Kontrol-listoj"
@@ -4908,7 +4972,7 @@ msgstr "Kontrol-listoj"
 msgid "moderation settings"
 msgstr "agordoj pri kontrolado"
 
-#: src/Navigation.tsx:296
+#: src/Navigation.tsx:297
 msgid "Moderation states"
 msgstr "Statoj de kontrolado"
 
@@ -4921,7 +4985,7 @@ msgstr "Kontroladaj iloj"
 msgid "Moderator has chosen to set a general warning on the content."
 msgstr "Kontrolanto decidis starigi ĝeneralan averton pri la enhavo."
 
-#: src/view/com/post-thread/PostThreadItem.tsx:731
+#: src/view/com/post-thread/PostThreadItem.tsx:728
 msgid "More"
 msgstr "Pli"
 
@@ -5031,7 +5095,7 @@ msgstr "Silentigi vortojn kaj kradvortojn"
 msgid "Muted accounts"
 msgstr "Silentigitaj kontoj"
 
-#: src/Navigation.tsx:172
+#: src/Navigation.tsx:173
 #: src/view/screens/ModerationMutedAccounts.tsx:118
 msgid "Muted Accounts"
 msgstr "Silentigitaj kontoj"
@@ -5150,7 +5214,7 @@ msgstr "Nova retpoŝtadreso"
 msgid "New Feature"
 msgstr "Nova funkcio"
 
-#: src/Navigation.tsx:453
+#: src/Navigation.tsx:454
 msgid "New follower notifications"
 msgstr "Sciigoj pri novaj sekvantoj"
 
@@ -5292,7 +5356,7 @@ msgstr "Sen bildo"
 msgid "No likes yet"
 msgstr "Ankoraŭ ne estas ŝatoj"
 
-#: src/components/ProfileCard.tsx:463
+#: src/components/ProfileCard.tsx:452
 #: src/screens/Profile/Header/ProfileHeaderStandard.tsx:110
 msgid "No longer following {0}"
 msgstr "Vi ne plu sekvas {0}"
@@ -5411,10 +5475,14 @@ msgstr "Neniu"
 msgid "Not followed by anyone you're following"
 msgstr "Sekvata de neniu el viaj sekvatoj"
 
-#: src/Navigation.tsx:152
+#: src/Navigation.tsx:153
 #: src/view/screens/Profile.tsx:125
 msgid "Not Found"
 msgstr "Netrovita"
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:75
+msgid "Not verified"
+msgstr ""
 
 #: src/view/com/profile/ProfileMenu.tsx:480
 msgid "Note about sharing"
@@ -5432,8 +5500,8 @@ msgstr "Noto: Ĉi tiu afiŝo videblas nur al ensalutintaj uzantoj."
 msgid "Nothing here"
 msgstr "Estas nenio ĉi tie"
 
-#: src/Navigation.tsx:407
-#: src/Navigation.tsx:554
+#: src/Navigation.tsx:408
+#: src/Navigation.tsx:555
 #: src/view/screens/Notifications.tsx:136
 msgid "Notification settings"
 msgstr "Sciigaj agordoj"
@@ -5446,8 +5514,8 @@ msgstr "Sciigaj sonoj"
 msgid "Notification Sounds"
 msgstr "Sciigaj sonoj"
 
-#: src/Navigation.tsx:549
-#: src/Navigation.tsx:741
+#: src/Navigation.tsx:550
+#: src/Navigation.tsx:747
 #: src/screens/Notifications/ActivityList.tsx:29
 #: src/screens/Settings/NotificationSettings/ActivityNotificationSettings.tsx:90
 #: src/screens/Settings/NotificationSettings/index.tsx:92
@@ -5460,8 +5528,8 @@ msgstr "Sciigaj sonoj"
 #: src/screens/Settings/NotificationSettings/ReplyNotificationSettings.tsx:30
 #: src/screens/Settings/NotificationSettings/RepostNotificationSettings.tsx:30
 #: src/screens/Settings/NotificationSettings/RepostsOnRepostsNotificationSettings.tsx:30
-#: src/screens/Settings/Settings.tsx:187
-#: src/screens/Settings/Settings.tsx:190
+#: src/screens/Settings/Settings.tsx:192
+#: src/screens/Settings/Settings.tsx:195
 #: src/view/screens/Notifications.tsx:130
 #: src/view/shell/bottom-bar/BottomBar.tsx:252
 #: src/view/shell/desktop/LeftNav.tsx:654
@@ -5515,7 +5583,7 @@ msgstr "Bone"
 
 #: src/screens/Login/PasswordUpdatedForm.tsx:37
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:664
-#: src/view/com/post-thread/PostThreadItem.tsx:985
+#: src/view/com/post-thread/PostThreadItem.tsx:982
 msgid "Okay"
 msgstr "Bone"
 
@@ -5534,7 +5602,7 @@ msgstr "La plej malnovaj respondoj unue"
 msgid "on<0><1/><2><3/></2></0>"
 msgstr "ĉe<0><1/><2><3/></2></0>"
 
-#: src/screens/Settings/Settings.tsx:369
+#: src/screens/Settings/Settings.tsx:370
 msgid "Onboarding reset"
 msgstr "Restarigi la lernilon"
 
@@ -5632,7 +5700,7 @@ msgstr "Malfermi ligilon al {niceUrl}"
 msgid "Open message options"
 msgstr "Malfermi opciojn de mesaĝoj"
 
-#: src/screens/Settings/Settings.tsx:410
+#: src/screens/Settings/Settings.tsx:411
 msgid "Open moderation debug page"
 msgstr "Malfermi la paĝon de kontrolada sencimigo"
 
@@ -5661,12 +5729,12 @@ msgstr "Malfermi konigadan menuon"
 msgid "Open starter pack menu"
 msgstr "Malfermi menuon de startpako"
 
-#: src/screens/Settings/Settings.tsx:403
-#: src/screens/Settings/Settings.tsx:417
+#: src/screens/Settings/Settings.tsx:404
+#: src/screens/Settings/Settings.tsx:418
 msgid "Open storybook page"
 msgstr "Malfermi la historiopaĝon"
 
-#: src/screens/Settings/Settings.tsx:396
+#: src/screens/Settings/Settings.tsx:397
 msgid "Open system log"
 msgstr "Malfermi sisteman protokolon"
 
@@ -5728,7 +5796,7 @@ msgstr "Malfermas procezon de ensalutado al via ekzistanta Bluesky-konto"
 msgid "Opens GIF select dialog"
 msgstr "Malfermas GIF-elektilan dialogujon"
 
-#: src/screens/Settings/Settings.tsx:228
+#: src/screens/Settings/Settings.tsx:233
 msgid "Opens helpdesk in browser"
 msgstr "Malfermas la helpocentron en retumilo"
 
@@ -5866,11 +5934,11 @@ msgstr "Paŭzigi videaĵon"
 msgid "People"
 msgstr "Homoj"
 
-#: src/Navigation.tsx:223
+#: src/Navigation.tsx:224
 msgid "People followed by @{0}"
 msgstr "Homoj sekvataj de @{0}"
 
-#: src/Navigation.tsx:216
+#: src/Navigation.tsx:217
 msgid "People following @{0}"
 msgstr "Homoj sekvantaj @{0}"
 
@@ -6117,10 +6185,10 @@ msgstr "Afiŝo blokita"
 msgid "Post by {0}"
 msgstr "Afiŝo de {0}"
 
-#: src/Navigation.tsx:249
-#: src/Navigation.tsx:256
-#: src/Navigation.tsx:263
-#: src/Navigation.tsx:270
+#: src/Navigation.tsx:250
+#: src/Navigation.tsx:257
+#: src/Navigation.tsx:264
+#: src/Navigation.tsx:271
 msgid "Post by @{0}"
 msgstr "Afiŝo de @{0}"
 
@@ -6158,7 +6226,7 @@ msgstr "Afiŝo kaŝita de vi"
 msgid "Post interaction settings"
 msgstr "Interagaj agordoj de afiŝo"
 
-#: src/Navigation.tsx:183
+#: src/Navigation.tsx:184
 #: src/screens/ModerationInteractionSettings/index.tsx:34
 msgid "Post Interaction Settings"
 msgstr "Interagaj agordoj de afiŝo"
@@ -6252,13 +6320,13 @@ msgstr "Prioritatigi viajn sekvatojn"
 msgid "Privacy"
 msgstr "Privateco"
 
+#: src/screens/Settings/Settings.tsx:170
 #: src/screens/Settings/Settings.tsx:173
-#: src/screens/Settings/Settings.tsx:176
 msgid "Privacy and security"
 msgstr "Privateco kaj sekureco"
 
-#: src/Navigation.tsx:392
-#: src/Navigation.tsx:400
+#: src/Navigation.tsx:393
+#: src/Navigation.tsx:401
 #: src/screens/Settings/ActivityPrivacySettings.tsx:40
 #: src/screens/Settings/PrivacyAndSecuritySettings.tsx:45
 msgid "Privacy and Security"
@@ -6268,7 +6336,7 @@ msgstr "Privateco kaj sekureco"
 msgid "Privacy and Security settings"
 msgstr "Agordoj de privateco kaj sekureco"
 
-#: src/Navigation.tsx:316
+#: src/Navigation.tsx:317
 #: src/screens/Settings/AboutSettings.tsx:92
 #: src/screens/Settings/AboutSettings.tsx:95
 #: src/view/screens/PrivacyPolicy.tsx:31
@@ -6363,7 +6431,7 @@ msgstr "QR-kodo estis elŝutita!"
 msgid "QR code saved to your camera roll!"
 msgstr "QR-kodo konservita en via bildgalerio!"
 
-#: src/Navigation.tsx:429
+#: src/Navigation.tsx:430
 msgid "Quote notifications"
 msgstr "Sciigoj pri citaĵoj"
 
@@ -6512,7 +6580,7 @@ msgstr "Reŝargi konversaciojn"
 #: src/components/FeedCard.tsx:343
 #: src/components/StarterPack/Wizard/WizardListCard.tsx:102
 #: src/components/StarterPack/Wizard/WizardListCard.tsx:109
-#: src/screens/Settings/Settings.tsx:567
+#: src/screens/Settings/Settings.tsx:568
 #: src/view/com/feeds/FeedSourceCard.tsx:322
 #: src/view/com/modals/UserAddRemoveLists.tsx:235
 #: src/view/com/posts/PostFeedErrorMessage.tsx:217
@@ -6527,8 +6595,8 @@ msgstr "Forigi {displayName} el la startpako"
 msgid "Remove {historyItem}"
 msgstr "Forigi {historyItem}"
 
-#: src/screens/Settings/Settings.tsx:546
-#: src/screens/Settings/Settings.tsx:549
+#: src/screens/Settings/Settings.tsx:547
+#: src/screens/Settings/Settings.tsx:550
 msgid "Remove account"
 msgstr "Forigi konton"
 
@@ -6569,7 +6637,7 @@ msgstr "Ĉu forigi fluon?"
 msgid "Remove from my feeds"
 msgstr "Forigi el miaj fluoj"
 
-#: src/screens/Settings/Settings.tsx:559
+#: src/screens/Settings/Settings.tsx:560
 msgid "Remove from quick access?"
 msgstr "Ĉu forigi el la rapitatingo?"
 
@@ -6702,7 +6770,7 @@ msgstr "Respondo kaŝita de la faden-aŭtoro"
 msgid "Reply Hidden by You"
 msgstr "Respondo kaŝita de vi"
 
-#: src/Navigation.tsx:413
+#: src/Navigation.tsx:414
 msgid "Reply notifications"
 msgstr "Sciigoj pri respondoj"
 
@@ -6854,7 +6922,7 @@ msgstr "Reafiŝi"
 msgid "Repost ({0, plural, one {# repost} other {# reposts}})"
 msgstr "Reafiŝi ({0, plural, one {# reafiŝo} other {# reafiŝoj}})"
 
-#: src/Navigation.tsx:445
+#: src/Navigation.tsx:446
 msgid "Repost notifications"
 msgstr "Sciigoj pri reafiŝoj"
 
@@ -6899,7 +6967,7 @@ msgstr "Reafiŝoj de ĉi tiu afiŝo"
 msgid "Reposts of your reposts"
 msgstr "Reafiŝoj de viaj reafiŝoj"
 
-#: src/Navigation.tsx:469
+#: src/Navigation.tsx:470
 msgid "Reposts of your reposts notifications"
 msgstr "Sciigoj pri reafiŝoj de viaj reafiŝoj"
 
@@ -6942,8 +7010,8 @@ msgstr "Resendi retmesaĝon"
 msgid "Resend Verification Email"
 msgstr "Resendi konfirman retmesaĝon"
 
-#: src/screens/Settings/Settings.tsx:439
-#: src/screens/Settings/Settings.tsx:441
+#: src/screens/Settings/Settings.tsx:440
+#: src/screens/Settings/Settings.tsx:442
 msgid "Reset activity subscription nudge"
 msgstr "Restarigi kubutumon pri agada abono"
 
@@ -6956,8 +7024,8 @@ msgstr "Restariga kodo"
 msgid "Reset Code"
 msgstr "Restariga kodo"
 
-#: src/screens/Settings/Settings.tsx:424
-#: src/screens/Settings/Settings.tsx:426
+#: src/screens/Settings/Settings.tsx:425
+#: src/screens/Settings/Settings.tsx:427
 msgid "Reset onboarding state"
 msgstr "Restarigi staton de la lernilo"
 
@@ -7101,6 +7169,11 @@ msgstr "Konservi agordojn de bildstucado"
 msgid "Say hello!"
 msgstr "Diru saluton!"
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:362
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:376
+msgid "Scan this QR code with your wallet to establish a secure connection."
+msgstr ""
+
 #: src/screens/Onboarding/index.tsx:33
 #: src/screens/Onboarding/state.ts:112
 msgid "Science"
@@ -7119,7 +7192,7 @@ msgstr "Rulumi al la supro"
 msgid "Search"
 msgstr "Serĉi"
 
-#: src/Navigation.tsx:242
+#: src/Navigation.tsx:243
 #: src/screens/Profile/ProfileSearch.tsx:37
 msgid "Search @{0}'s posts"
 msgstr "Serĉi afiŝojn de @{0}"
@@ -7435,8 +7508,8 @@ msgstr "Agordu vian konton"
 msgid "Sets email for password reset"
 msgstr "Agordas retpoŝtadreson por restarigi pasvorton"
 
-#: src/Navigation.tsx:198
-#: src/screens/Settings/Settings.tsx:92
+#: src/Navigation.tsx:199
+#: src/screens/Settings/Settings.tsx:89
 #: src/view/shell/desktop/LeftNav.tsx:727
 #: src/view/shell/Drawer.tsx:572
 msgid "Settings"
@@ -7575,7 +7648,7 @@ msgstr "Konigi per..."
 msgid "Share your favorite feed!"
 msgstr "Konigu vian plej ŝatatan fluon!"
 
-#: src/Navigation.tsx:301
+#: src/Navigation.tsx:302
 msgid "Shared Preferences Tester"
 msgstr "Testanto de komunaj preferoj"
 
@@ -7692,11 +7765,11 @@ msgid "Show warning and filter from feeds"
 msgstr "Montri averton kaj elfiltri el fluoj"
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:605
-#: src/view/com/post-thread/PostThreadItem.tsx:926
+#: src/view/com/post-thread/PostThreadItem.tsx:923
 msgid "Shows information about when this post was created"
 msgstr "Montri informojn pri kiam ĉi tiu afiŝo estis kreita"
 
-#: src/screens/Settings/Settings.tsx:116
+#: src/screens/Settings/Settings.tsx:113
 msgid "Shows other accounts you can switch to"
 msgstr "Montras aliajn kontojn al kiuj vi povas ŝanĝi"
 
@@ -7753,9 +7826,9 @@ msgstr "Ensalutu al Bluesky aŭ kreu novan konton"
 msgid "Sign in to view post"
 msgstr "Ensalutu por vidi la afiŝon"
 
-#: src/screens/Settings/Settings.tsx:245
-#: src/screens/Settings/Settings.tsx:247
-#: src/screens/Settings/Settings.tsx:279
+#: src/screens/Settings/Settings.tsx:250
+#: src/screens/Settings/Settings.tsx:252
+#: src/screens/Settings/Settings.tsx:284
 #: src/screens/SignupQueued.tsx:93
 #: src/screens/SignupQueued.tsx:96
 #: src/screens/Takendown.tsx:85
@@ -7769,7 +7842,7 @@ msgstr "Elsaluti"
 msgid "Sign Out"
 msgstr "Elsaluti"
 
-#: src/screens/Settings/Settings.tsx:276
+#: src/screens/Settings/Settings.tsx:281
 #: src/view/shell/desktop/LeftNav.tsx:209
 msgid "Sign out?"
 msgstr "Ĉu elsaluti?"
@@ -7931,8 +8004,8 @@ msgstr "Komencu aldoni homojn!"
 msgid "Start chat with {displayName}"
 msgstr "Komenci babili kun {displayName}"
 
-#: src/Navigation.tsx:564
-#: src/Navigation.tsx:569
+#: src/Navigation.tsx:565
+#: src/Navigation.tsx:570
 #: src/screens/StarterPack/Wizard/index.tsx:186
 msgid "Starter Pack"
 msgstr "Startpako"
@@ -7972,12 +8045,12 @@ msgstr "Paĝo pri stato"
 msgid "Step {0} of {1}"
 msgstr "Paŝo {0} el {1}"
 
-#: src/screens/Settings/Settings.tsx:374
+#: src/screens/Settings/Settings.tsx:375
 msgid "Storage cleared, you need to restart the app now."
 msgstr "Konservejo vakigita, nun relanĉu la apon."
 
-#: src/Navigation.tsx:291
-#: src/screens/Settings/Settings.tsx:405
+#: src/Navigation.tsx:292
+#: src/screens/Settings/Settings.tsx:406
 msgid "Storybook"
 msgstr "Historio de agoj"
 
@@ -8057,15 +8130,15 @@ msgctxt "Name of app icon variant"
 msgid "Sunset"
 msgstr "Sunsubiro"
 
-#: src/Navigation.tsx:311
+#: src/Navigation.tsx:312
 #: src/view/screens/Support.tsx:31
 #: src/view/screens/Support.tsx:34
 msgid "Support"
 msgstr "Subteno"
 
-#: src/screens/Settings/Settings.tsx:114
-#: src/screens/Settings/Settings.tsx:128
-#: src/screens/Settings/Settings.tsx:509
+#: src/screens/Settings/Settings.tsx:111
+#: src/screens/Settings/Settings.tsx:125
+#: src/screens/Settings/Settings.tsx:510
 #: src/view/shell/desktop/LeftNav.tsx:246
 msgid "Switch account"
 msgstr "Ŝanĝi konton"
@@ -8092,7 +8165,7 @@ msgstr "Sistema"
 
 #: src/screens/Settings/AboutSettings.tsx:107
 #: src/screens/Settings/AboutSettings.tsx:110
-#: src/screens/Settings/Settings.tsx:398
+#: src/screens/Settings/Settings.tsx:399
 msgid "System log"
 msgstr "Sistema protokolo"
 
@@ -8144,7 +8217,7 @@ msgstr "Diru nin pli"
 msgid "Terms"
 msgstr "Kondiĉoj"
 
-#: src/Navigation.tsx:321
+#: src/Navigation.tsx:322
 #: src/screens/Settings/AboutSettings.tsx:84
 #: src/screens/Settings/AboutSettings.tsx:87
 #: src/view/screens/TermsOfService.tsx:31
@@ -8307,6 +8380,10 @@ msgstr "La Uzkondiĉoj translokiĝis al"
 msgid "The verification code you have provided is invalid. Please make sure that you have used the correct verification link or request a new one."
 msgstr "La konfirmkodo kiun vi entajpis estas nevalida. Bonvolu certiĝi, ke vi uzis la ĝustan konfirman ligilon aŭ petu la novan."
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:372
+msgid "The verification process was interrupted. Please try again."
+msgstr ""
+
 #: src/screens/Settings/AppearanceSettings.tsx:154
 msgid "Theme"
 msgstr "Etosa"
@@ -8422,9 +8499,25 @@ msgstr "Ĉi tiuj agordoj nur aplikas al la fluo de sekvatoj."
 msgid "This {screenDescription} has been flagged:"
 msgstr "Ĉi tiu {screenDescription} estas markita per flago:"
 
+#: src/components/verification/AccountVerificationDialog.tsx:78
+msgid "This account does not have account verification."
+msgstr ""
+
+#: src/components/verification/AgeVerificationDialog.tsx:77
+msgid "This account does not have age verification."
+msgstr ""
+
 #: src/components/verification/VerificationsDialog.tsx:87
 msgid "This account has a checkmark because it's been verified by trusted sources."
 msgstr "Ĉi tiu konto havas kontrolmarkon, ĉar ĝi estis konfirmita de fidataj fontoj."
+
+#: src/components/verification/AccountVerificationDialog.tsx:72
+msgid "This account has an account verification badge because the account holder's identity has been verified through a trusted verification process."
+msgstr ""
+
+#: src/components/verification/AgeVerificationDialog.tsx:71
+msgid "This account has an age verification badge because it has been verified to be over 21 years of age through a trusted verification process."
+msgstr ""
 
 #: src/components/verification/VerificationsDialog.tsx:92
 msgid "This account has one or more attempted verifications, but it is not currently verified."
@@ -8563,7 +8656,7 @@ msgid "This moderation service is unavailable. See below for more details. If th
 msgstr "Ĉi tiu kontrolservo neatingeblas. Vidu pli da detaloj sube. Se ĉi tiu problemo daŭras, kontaktu nin."
 
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:645
-#: src/view/com/post-thread/PostThreadItem.tsx:966
+#: src/view/com/post-thread/PostThreadItem.tsx:963
 msgid "This post claims to have been created on <0>{0}</0>, but was first seen by Bluesky on <1>{1}</1>."
 msgstr "Ĉi tiu afiŝo asertas, ke ĝi estis kreita je <0>{0}</0>, sed ĝi estis unue vidita ĉe Bluesky je <1>{1}</1>."
 
@@ -8644,7 +8737,7 @@ msgstr "Ĉi tiu uzanto sekvas neniun."
 msgid "This will delete \"{0}\" from your muted words. You can always add it back later."
 msgstr "Ĉi tio forigos \"{0}\" de viaj silentigitaj vortoj. Vi ĉiam povos realdoni ĝin poste."
 
-#: src/screens/Settings/Settings.tsx:561
+#: src/screens/Settings/Settings.tsx:562
 msgid "This will remove @{0} from the quick access list."
 msgstr "Ĉi tio forigos @{0} el la listo de rapidatingo."
 
@@ -8680,7 +8773,7 @@ msgstr "Fadene"
 msgid "Threaded mode"
 msgstr "Fadena reĝimo"
 
-#: src/Navigation.tsx:354
+#: src/Navigation.tsx:355
 msgid "Threads Preferences"
 msgstr "Agordoj pri fadenoj"
 
@@ -8734,7 +8827,7 @@ msgstr "Plej popularaj"
 msgid "Top replies first"
 msgstr "La plej popularaj respondoj unue"
 
-#: src/Navigation.tsx:529
+#: src/Navigation.tsx:530
 msgid "Topic"
 msgstr "Temo"
 
@@ -8744,8 +8837,8 @@ msgstr "Temo"
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:446
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:567
 #: src/screens/PostThread/components/ThreadItemAnchor.tsx:570
+#: src/view/com/post-thread/PostThreadItem.tsx:885
 #: src/view/com/post-thread/PostThreadItem.tsx:888
-#: src/view/com/post-thread/PostThreadItem.tsx:891
 msgid "Translate"
 msgstr "Traduki"
 
@@ -8961,8 +9054,8 @@ msgstr "{0} depinglita de hejmo"
 msgid "Unpinned from your feeds"
 msgstr "Depinglita de viaj fadenoj"
 
-#: src/screens/Settings/Settings.tsx:431
-#: src/screens/Settings/Settings.tsx:433
+#: src/screens/Settings/Settings.tsx:432
+#: src/screens/Settings/Settings.tsx:434
 msgid "Unsnooze email reminder"
 msgstr "Maldormeti retmesaĝan sciigon"
 
@@ -9189,6 +9282,33 @@ msgstr "Uzantoj, kiujn vi sekvas"
 msgid "Value:"
 msgstr "Valoro:"
 
+#: src/screens/Settings/Settings.tsx:184
+#: src/screens/Settings/Settings.tsx:187
+msgid "Verifiable credentials"
+msgstr ""
+
+#: src/Navigation.tsx:593
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:91
+msgid "Verifiable Credentials"
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:164
+msgid "Verifiable credentials allow you to prove your age or account ownership without revealing unnecessary personal information. Your data stays private and secure in your wallet."
+msgstr ""
+
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Success.tsx:23
+msgid "Verification complete!"
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:61
+msgid "Verification completed successfully!"
+msgstr ""
+
+#: src/components/verification/AccountVerificationDialog.tsx:86
+#: src/components/verification/AgeVerificationDialog.tsx:85
+msgid "Verification details:"
+msgstr ""
+
 #: src/components/verification/VerificationCreatePrompt.tsx:39
 msgid "Verification failed, please try again."
 msgstr "Konfirmado malsukcesis, bonvolu reprovi."
@@ -9197,7 +9317,7 @@ msgstr "Konfirmado malsukcesis, bonvolu reprovi."
 msgid "Verification settings"
 msgstr "Konfirmadaj agordoj"
 
-#: src/Navigation.tsx:191
+#: src/Navigation.tsx:192
 #: src/screens/Moderation/VerificationSettings.tsx:32
 msgid "Verification Settings"
 msgstr "Konfirmadaj agordoj"
@@ -9205,6 +9325,15 @@ msgstr "Konfirmadaj agordoj"
 #: src/screens/Moderation/VerificationSettings.tsx:41
 msgid "Verifications on Bluesky work differently than on other platforms. <0>Learn more here.</0>"
 msgstr "Konfirmado ĉe Bluesky funkcias alie ol ĉe aliaj platformoj. <0>Eksciu pli ĉi tie.</0>"
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:73
+msgid "Verified"
+msgstr ""
+
+#: src/components/verification/AccountVerificationDialog.tsx:92
+#: src/components/verification/AgeVerificationDialog.tsx:91
+msgid "Verified at:"
+msgstr ""
 
 #: src/components/verification/VerificationsDialog.tsx:103
 msgid "Verified by:"
@@ -9216,6 +9345,14 @@ msgstr "Konfirmita de:"
 #: src/view/com/profile/ProfileMenu.tsx:349
 msgid "Verify account"
 msgstr "Konfirmi konton"
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:150
+msgid "Verify Accounts"
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:119
+msgid "Verify Age"
+msgstr ""
 
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:348
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:359
@@ -9244,11 +9381,23 @@ msgstr "Kontroli tekstodosieron"
 msgid "Verify this account?"
 msgstr "Ĉu konfirmi ĉi tiun konton?"
 
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:115
+msgid "Verify your age"
+msgstr ""
+
+#: src/components/dialogs/VerifiableCredentialsDialog/index.tsx:41
+msgid "Verify your credentials using a wallet"
+msgstr ""
+
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:211
 #: src/screens/Settings/AccountSettings.tsx:78
 #: src/screens/Settings/AccountSettings.tsx:98
 msgid "Verify your email"
 msgstr "Konfirmi vian retpoŝtadreson"
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:146
+msgid "Verify your social media accounts"
+msgstr ""
 
 #: src/screens/Settings/AboutSettings.tsx:126
 #: src/screens/Settings/AboutSettings.tsx:155
@@ -9264,7 +9413,7 @@ msgstr "Videaĵo"
 msgid "Video failed to process"
 msgstr "Pritraktado de videaĵo fiaskis"
 
-#: src/Navigation.tsx:585
+#: src/Navigation.tsx:586
 msgid "Video Feed"
 msgstr "Videaĵo-fluo"
 
@@ -9315,7 +9464,7 @@ msgstr "Videaĵoj devas esti malpli ol 3 minutojn longaj"
 msgid "View {0}'s avatar"
 msgstr "Vidi la profilbildon de {0}"
 
-#: src/components/ProfileCard.tsx:118
+#: src/components/ProfileCard.tsx:117
 #: src/screens/Profile/components/ProfileFeedHeader.tsx:454
 #: src/screens/Search/components/SearchProfileCard.tsx:36
 #: src/screens/VideoFeed/index.tsx:790
@@ -9327,7 +9476,15 @@ msgstr "Vidi la profilon de {0}"
 msgid "View {displayName}'s profile"
 msgstr "Vidi la profilon de {displayName}"
 
-#: src/components/ProfileHoverCard/index.web.tsx:478
+#: src/components/verification/VerificationBadges.tsx:244
+msgid "View account verification"
+msgstr ""
+
+#: src/components/verification/VerificationBadges.tsx:183
+msgid "View age verification"
+msgstr ""
+
+#: src/components/ProfileHoverCard/index.web.tsx:476
 msgid "View blocked user's profile"
 msgstr "Vidi la profilon de blokita uzanto"
 
@@ -9344,6 +9501,11 @@ msgstr "Vidi protokolan eron"
 #: src/screens/VideoFeed/index.tsx:674
 msgid "View details"
 msgstr "Vidi detalojn"
+
+#: src/components/verification/AccountVerificationDialog.tsx:147
+#: src/components/verification/AgeVerificationDialog.tsx:134
+msgid "View Details"
+msgstr ""
 
 #: src/components/moderation/ReportDialog/index.tsx:271
 #: src/components/ReportDialog/SelectReportOptionView.tsx:132
@@ -9365,12 +9527,12 @@ msgstr "Vidu informojn pri ĉi tiuj etikedoj"
 msgid "View more"
 msgstr "Vidi pli"
 
-#: src/components/ProfileHoverCard/index.web.tsx:464
-#: src/components/ProfileHoverCard/index.web.tsx:484
-#: src/components/ProfileHoverCard/index.web.tsx:511
+#: src/components/ProfileHoverCard/index.web.tsx:462
+#: src/components/ProfileHoverCard/index.web.tsx:482
+#: src/components/ProfileHoverCard/index.web.tsx:509
 #: src/view/com/posts/PostFeedErrorMessage.tsx:179
-#: src/view/com/util/PostMeta.tsx:91
-#: src/view/com/util/PostMeta.tsx:127
+#: src/view/com/util/PostMeta.tsx:89
+#: src/view/com/util/PostMeta.tsx:120
 msgid "View profile"
 msgstr "Vidi profilon"
 
@@ -9382,6 +9544,10 @@ msgstr "Vidi la profilbildon"
 msgid "View the labeling service provided by @{0}"
 msgstr "Vidi la etikedadan servon provizitan de @{0}"
 
+#: src/components/verification/VerificationBadges.tsx:102
+msgid "View this user's Bluesky verification"
+msgstr ""
+
 #: src/components/verification/VerificationCheckButton.tsx:99
 msgid "View this user's verifications"
 msgstr "Vidi konfirmojn de ĉi tiu uzanto"
@@ -9390,6 +9556,11 @@ msgstr "Vidi konfirmojn de ĉi tiu uzanto"
 msgid "View users who like this feed"
 msgstr "Vidi uzantojn, kiuj ŝatis ĉi tiun fluon"
 
+#: src/components/verification/AccountVerificationDialog.tsx:136
+#: src/components/verification/AgeVerificationDialog.tsx:123
+msgid "View verification details on verifier service"
+msgstr ""
+
 #: src/components/VideoPostCard.tsx:398
 msgid "View video"
 msgstr "Vidi videaĵon"
@@ -9397,6 +9568,10 @@ msgstr "Vidi videaĵon"
 #: src/screens/Moderation/index.tsx:268
 msgid "View your blocked accounts"
 msgstr "Vidi viajn blokitajn kontojn"
+
+#: src/components/verification/VerificationBadges.tsx:101
+msgid "View your Bluesky verification"
+msgstr ""
 
 #: src/screens/Moderation/index.tsx:208
 msgid "View your default post interaction settings"
@@ -9902,6 +10077,10 @@ msgstr "Vi ankoraŭ ne silentigis iun ajn konton. Por silentigi konton, iru al t
 msgid "You have reached the end"
 msgstr "Vi atingis la finon"
 
+#: src/components/dialogs/VerifiableCredentialsDialog/screens/Success.tsx:27
+msgid "You have successfully verified your {0}. Your credential is now active and will be displayed on your profile."
+msgstr ""
+
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:187
 msgid "You have successfully verified your email address. You can close this dialog."
 msgstr "Vi sukcese konfirmis vian retpoŝtadreson. Vi povas fermi ĉi tiun dialogujon."
@@ -9972,7 +10151,7 @@ msgstr "Vi konfirmu vian retpoŝtadreson, antaŭ ol vi povos ŝalti retpoŝtan 2
 msgid "You previously deactivated @{0}."
 msgstr "Vi antaŭe malaktivigis @{0}."
 
-#: src/screens/Settings/Settings.tsx:385
+#: src/screens/Settings/Settings.tsx:386
 msgid "You probably want to restart the app now."
 msgstr "Vi volu nun relanĉi la apon."
 
@@ -9984,7 +10163,7 @@ msgstr "Vi reagis per {0}"
 msgid "You reacted {0} to {1}"
 msgstr "Vi reagis per {0} al {1}"
 
-#: src/screens/Settings/Settings.tsx:277
+#: src/screens/Settings/Settings.tsx:282
 #: src/view/shell/desktop/LeftNav.tsx:210
 msgid "You will be signed out of all your accounts."
 msgstr "Vi elsalutos el ĉiuj viaj kontoj."
@@ -10103,9 +10282,17 @@ msgstr "Via konto ne estas sufiĉe malnova por alŝuti videaĵojn. Bonvolu repro
 msgid "Your account repository, containing all public data records, can be downloaded as a \"CAR\" file. This file does not include media embeds, such as images, or your private data, which must be fetched separately."
 msgstr "Via konta deponejo enhavanta ĉiujn publikajn datum-rikordojn estas elŝutebla kiel \"CAR\"-dosiero. Tiu dosiero ne enhavas aŭdvidaĵajn enkorpigaĵojn kiel bildoj aŭ viaj privataj datumoj kiuj devas esti elŝutitaj aparte."
 
+#: src/components/verification/AccountVerificationDialog.tsx:57
+msgid "Your account verification"
+msgstr ""
+
 #: src/screens/Takendown.tsx:214
 msgid "Your account was found to be in violation of the <0>Bluesky Social Terms of Service</0>. You have been sent an email outlining the specific violation and suspension period, if applicable. You can appeal this decision if you believe it was made in error."
 msgstr "Via konto evidentiĝis esti kontraŭ la <0>Uzokondiĉoj de Bluesky Social</0>. Ni sendis vin retmesaĝon skizantan la specifan malobservon kaj suspendan periodon, se aplikebla. Vi povas apelacii ĉi tiun decidon se vi kredas, ke ĝi estis farita erare."
+
+#: src/components/verification/AgeVerificationDialog.tsx:56
+msgid "Your age verification"
+msgstr ""
 
 #: src/screens/Takendown.tsx:154
 msgid "Your appeal has been submitted. If your appeal succeeds, you will receive an email."
@@ -10162,7 +10349,7 @@ msgstr "Via tuta identigilo estos <0>@{0}</0>"
 msgid "Your full username will be <0>@{0}</0>"
 msgstr "Via tuta uzantnomo estos <0>@{0}</0>"
 
-#: src/Navigation.tsx:501
+#: src/Navigation.tsx:502
 #: src/screens/Search/modules/ExploreInterestsCard.tsx:67
 #: src/screens/Settings/ContentAndMediaSettings.tsx:92
 #: src/screens/Settings/ContentAndMediaSettings.tsx:95

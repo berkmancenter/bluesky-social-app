@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Build internationalization
+        run: yarn intl:build
+
       - name: Build web
         run: yarn build-web
 

@@ -65,6 +65,7 @@ import {useActivitySubscriptionsNudged} from '#/storage/hooks/activity-subscript
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'Settings'>
 export function SettingsScreen({}: Props) {
   const {_} = useLingui()
+  const t = useTheme()
   const reducedMotion = useReducedMotion()
   const {logoutEveryAccount} = useSessionApi()
   const {accounts, currentAccount} = useSession()
@@ -184,7 +185,27 @@ export function SettingsScreen({}: Props) {
             label={_(msg`Verifiable credentials`)}>
             <SettingsList.ItemIcon icon={ShieldIcon} />
             <SettingsList.ItemText>
-              <Trans>Verifiable credentials</Trans>
+              <View style={[a.flex_row, a.align_center, a.gap_xs]}>
+                <Text>
+                  <Trans>Verifiable credentials</Trans>
+                </Text>
+                <View
+                  style={[
+                    a.px_xs,
+                    a.py_xs,
+                    a.rounded_sm,
+                    {backgroundColor: t.palette.positive_25},
+                  ]}>
+                  <Text
+                    style={[
+                      a.text_xs,
+                      {color: t.palette.positive_700},
+                      a.font_bold,
+                    ]}>
+                    DEMO
+                  </Text>
+                </View>
+              </View>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem

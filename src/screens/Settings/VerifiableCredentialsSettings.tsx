@@ -39,6 +39,7 @@ import {AccountVerificationBadge} from '#/components/icons/AccountVerificationBa
 import {AgeVerificationBadge} from '#/components/icons/AgeVerificationBadge'
 import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/Shield'
 import {VerifiedCheck} from '#/components/icons/VerifiedCheck'
+import {Warning_Stroke2_Corner0_Rounded as WarningIcon} from '#/components/icons/Warning'
 import * as Layout from '#/components/Layout'
 import {Text} from '#/components/Typography'
 
@@ -275,6 +276,42 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
         <Layout.Header.Slot />
       </Layout.Header.Outer>
       <Layout.Content>
+        {/* Demonstration Banner */}
+        <View
+          style={[
+            a.mx_md,
+            a.mt_md,
+            a.mb_lg,
+            a.p_md,
+            a.rounded_md,
+            {backgroundColor: t.palette.negative_25},
+            {borderWidth: 1, borderColor: t.palette.negative_200},
+          ]}>
+          <View
+            style={[
+              a.flex_row,
+              a.align_center,
+              a.justify_center,
+              a.gap_sm,
+              a.mb_sm,
+            ]}>
+            <WarningIcon size="md" fill={t.palette.negative_700} />
+            <Text
+              style={[
+                a.text_md,
+                {color: t.palette.negative_700},
+                a.font_bold,
+                a.text_center,
+              ]}>
+              Verifiable Credentials - Demonstration Environment
+            </Text>
+          </View>
+          <Text
+            style={[a.text_sm, {color: t.palette.negative_700}, a.text_center]}>
+            This feature is currently in testing phase and not production-ready.
+          </Text>
+        </View>
+
         <View style={[a.px_md, a.py_lg]}>
           {/* Available Verifications */}
           <Text style={[a.font_bold, a.text_lg, a.mb_md]}>

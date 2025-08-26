@@ -220,12 +220,6 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
             </View>
             <View>
               <Text style={[a.font_bold, a.text_md]}>{card.title}</Text>
-              {card.platform && (
-                <Text
-                  style={[a.text_xs, t.atoms.text_contrast_medium, a.mt_xs]}>
-                  {card.platform}
-                </Text>
-              )}
             </View>
           </View>
 

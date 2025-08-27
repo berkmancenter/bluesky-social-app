@@ -515,8 +515,8 @@ msgstr ""
 
 #: src/Navigation.tsx:510
 #: src/screens/Settings/AboutSettings.tsx:75
-#: src/screens/Settings/Settings.tsx:240
-#: src/screens/Settings/Settings.tsx:243
+#: src/screens/Settings/Settings.tsx:261
+#: src/screens/Settings/Settings.tsx:264
 msgid "About"
 msgstr ""
 
@@ -535,8 +535,8 @@ msgid "Accept Request"
 msgstr ""
 
 #: src/screens/Settings/AccessibilitySettings.tsx:44
-#: src/screens/Settings/Settings.tsx:216
-#: src/screens/Settings/Settings.tsx:219
+#: src/screens/Settings/Settings.tsx:237
+#: src/screens/Settings/Settings.tsx:240
 msgid "Accessibility"
 msgstr ""
 
@@ -547,8 +547,8 @@ msgstr ""
 #: src/Navigation.tsx:385
 #: src/screens/Login/LoginForm.tsx:194
 #: src/screens/Settings/AccountSettings.tsx:48
-#: src/screens/Settings/Settings.tsx:162
-#: src/screens/Settings/Settings.tsx:165
+#: src/screens/Settings/Settings.tsx:163
+#: src/screens/Settings/Settings.tsx:166
 msgid "Account"
 msgstr ""
 
@@ -579,11 +579,11 @@ msgstr ""
 msgid "Account Muted by List"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:530
+#: src/screens/Settings/Settings.tsx:551
 msgid "Account options"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:566
+#: src/screens/Settings/Settings.tsx:587
 msgid "Account removed from quick access"
 msgstr ""
 
@@ -605,7 +605,6 @@ msgid "Account unmuted"
 msgstr ""
 
 #: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:352
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:129
 msgid "Account Verification"
 msgstr ""
 
@@ -670,8 +669,8 @@ msgstr ""
 msgid "Add alt text (optional)"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:470
-#: src/screens/Settings/Settings.tsx:473
+#: src/screens/Settings/Settings.tsx:491
+#: src/screens/Settings/Settings.tsx:494
 #: src/view/shell/desktop/LeftNav.tsx:260
 #: src/view/shell/desktop/LeftNav.tsx:264
 msgid "Add another account"
@@ -800,7 +799,6 @@ msgid "Advanced"
 msgstr ""
 
 #: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:350
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:101
 msgid "Age Verification"
 msgstr ""
 
@@ -1091,8 +1089,8 @@ msgstr ""
 
 #: src/Navigation.tsx:377
 #: src/screens/Settings/AppearanceSettings.tsx:88
-#: src/screens/Settings/Settings.tsx:208
-#: src/screens/Settings/Settings.tsx:211
+#: src/screens/Settings/Settings.tsx:229
+#: src/screens/Settings/Settings.tsx:232
 msgid "Appearance"
 msgstr ""
 
@@ -1187,6 +1185,10 @@ msgstr ""
 #: src/screens/Settings/ContentAndMediaSettings.tsx:116
 #: src/screens/Settings/ContentAndMediaSettings.tsx:122
 msgid "Autoplay videos and GIFs"
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:318
+msgid "Available Verifications"
 msgstr ""
 
 #: src/components/dms/MessagesListHeader.tsx:84
@@ -1507,7 +1509,7 @@ msgstr ""
 #: src/screens/Settings/AppIconSettings/index.tsx:225
 #: src/screens/Settings/components/ChangeHandleDialog.tsx:78
 #: src/screens/Settings/components/ChangeHandleDialog.tsx:85
-#: src/screens/Settings/Settings.tsx:285
+#: src/screens/Settings/Settings.tsx:306
 #: src/screens/Takendown.tsx:99
 #: src/screens/Takendown.tsx:102
 #: src/view/com/composer/Composer.tsx:960
@@ -1727,11 +1729,11 @@ msgstr ""
 msgid "Choose your username"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:448
+#: src/screens/Settings/Settings.tsx:469
 msgid "Clear all storage data"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:450
+#: src/screens/Settings/Settings.tsx:471
 msgid "Clear all storage data (restart after this)"
 msgstr ""
 
@@ -1904,6 +1906,10 @@ msgstr ""
 msgid "Comics"
 msgstr ""
 
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:334
+msgid "Coming Soon"
+msgstr ""
+
 #: src/Navigation.tsx:327
 #: src/view/screens/CommunityGuidelines.tsx:34
 msgid "Community Guidelines"
@@ -1986,8 +1992,8 @@ msgstr ""
 msgid "Content & Media"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:200
-#: src/screens/Settings/Settings.tsx:203
+#: src/screens/Settings/Settings.tsx:221
+#: src/screens/Settings/Settings.tsx:224
 msgid "Content and media"
 msgstr ""
 
@@ -2341,7 +2347,7 @@ msgstr ""
 msgid "Deactivate account"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:413
+#: src/screens/Settings/Settings.tsx:434
 msgid "Debug Moderation"
 msgstr ""
 
@@ -2390,7 +2396,7 @@ msgstr ""
 msgid "Delete chat"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:420
+#: src/screens/Settings/Settings.tsx:441
 msgid "Delete chat declaration record"
 msgstr ""
 
@@ -2499,8 +2505,8 @@ msgctxt "toast"
 msgid "Developer mode enabled"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:267
-#: src/screens/Settings/Settings.tsx:270
+#: src/screens/Settings/Settings.tsx:288
+#: src/screens/Settings/Settings.tsx:291
 msgid "Developer options"
 msgstr ""
 
@@ -3372,7 +3378,7 @@ msgstr ""
 msgid "Failed to send proof request, please try again."
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:53
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:138
 msgid "Failed to start verification. Please try again."
 msgstr ""
 
@@ -3962,8 +3968,8 @@ msgstr ""
 msgid "Having trouble?"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:232
-#: src/screens/Settings/Settings.tsx:236
+#: src/screens/Settings/Settings.tsx:253
+#: src/screens/Settings/Settings.tsx:257
 #: src/view/shell/desktop/RightNav.tsx:120
 #: src/view/shell/desktop/RightNav.tsx:121
 #: src/view/shell/Drawer.tsx:370
@@ -4433,8 +4439,8 @@ msgid "Language Settings"
 msgstr ""
 
 #: src/screens/Settings/LanguageSettings.tsx:78
-#: src/screens/Settings/Settings.tsx:224
-#: src/screens/Settings/Settings.tsx:227
+#: src/screens/Settings/Settings.tsx:245
+#: src/screens/Settings/Settings.tsx:248
 msgid "Languages"
 msgstr ""
 
@@ -4743,7 +4749,7 @@ msgstr ""
 msgid "Load new posts"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:69
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:154
 #: src/view/com/composer/text-input/mobile/Autocomplete.tsx:61
 msgid "Loading..."
 msgstr ""
@@ -4921,8 +4927,8 @@ msgstr ""
 
 #: src/Navigation.tsx:163
 #: src/screens/Moderation/index.tsx:93
-#: src/screens/Settings/Settings.tsx:176
-#: src/screens/Settings/Settings.tsx:179
+#: src/screens/Settings/Settings.tsx:177
+#: src/screens/Settings/Settings.tsx:180
 msgid "Moderation"
 msgstr ""
 
@@ -5475,7 +5481,8 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:75
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:158
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:165
 msgid "Not verified"
 msgstr ""
 
@@ -5523,8 +5530,8 @@ msgstr ""
 #: src/screens/Settings/NotificationSettings/ReplyNotificationSettings.tsx:30
 #: src/screens/Settings/NotificationSettings/RepostNotificationSettings.tsx:30
 #: src/screens/Settings/NotificationSettings/RepostsOnRepostsNotificationSettings.tsx:30
-#: src/screens/Settings/Settings.tsx:192
-#: src/screens/Settings/Settings.tsx:195
+#: src/screens/Settings/Settings.tsx:213
+#: src/screens/Settings/Settings.tsx:216
 #: src/view/screens/Notifications.tsx:130
 #: src/view/shell/bottom-bar/BottomBar.tsx:252
 #: src/view/shell/desktop/LeftNav.tsx:654
@@ -5597,7 +5604,7 @@ msgstr ""
 msgid "on<0><1/><2><3/></2></0>"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:370
+#: src/screens/Settings/Settings.tsx:391
 msgid "Onboarding reset"
 msgstr ""
 
@@ -5695,7 +5702,7 @@ msgstr ""
 msgid "Open message options"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:411
+#: src/screens/Settings/Settings.tsx:432
 msgid "Open moderation debug page"
 msgstr ""
 
@@ -5724,12 +5731,12 @@ msgstr ""
 msgid "Open starter pack menu"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:404
-#: src/screens/Settings/Settings.tsx:418
+#: src/screens/Settings/Settings.tsx:425
+#: src/screens/Settings/Settings.tsx:439
 msgid "Open storybook page"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:397
+#: src/screens/Settings/Settings.tsx:418
 msgid "Open system log"
 msgstr ""
 
@@ -5791,7 +5798,7 @@ msgstr ""
 msgid "Opens GIF select dialog"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:233
+#: src/screens/Settings/Settings.tsx:254
 msgid "Opens helpdesk in browser"
 msgstr ""
 
@@ -6315,8 +6322,8 @@ msgstr ""
 msgid "Privacy"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:170
-#: src/screens/Settings/Settings.tsx:173
+#: src/screens/Settings/Settings.tsx:171
+#: src/screens/Settings/Settings.tsx:174
 msgid "Privacy and security"
 msgstr ""
 
@@ -6575,7 +6582,7 @@ msgstr ""
 #: src/components/FeedCard.tsx:343
 #: src/components/StarterPack/Wizard/WizardListCard.tsx:102
 #: src/components/StarterPack/Wizard/WizardListCard.tsx:109
-#: src/screens/Settings/Settings.tsx:568
+#: src/screens/Settings/Settings.tsx:589
 #: src/view/com/feeds/FeedSourceCard.tsx:322
 #: src/view/com/modals/UserAddRemoveLists.tsx:235
 #: src/view/com/posts/PostFeedErrorMessage.tsx:217
@@ -6590,8 +6597,8 @@ msgstr ""
 msgid "Remove {historyItem}"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:547
-#: src/screens/Settings/Settings.tsx:550
+#: src/screens/Settings/Settings.tsx:568
+#: src/screens/Settings/Settings.tsx:571
 msgid "Remove account"
 msgstr ""
 
@@ -6632,7 +6639,7 @@ msgstr ""
 msgid "Remove from my feeds"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:560
+#: src/screens/Settings/Settings.tsx:581
 msgid "Remove from quick access?"
 msgstr ""
 
@@ -7005,8 +7012,8 @@ msgstr ""
 msgid "Resend Verification Email"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:440
-#: src/screens/Settings/Settings.tsx:442
+#: src/screens/Settings/Settings.tsx:461
+#: src/screens/Settings/Settings.tsx:463
 msgid "Reset activity subscription nudge"
 msgstr ""
 
@@ -7019,8 +7026,8 @@ msgstr ""
 msgid "Reset Code"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:425
-#: src/screens/Settings/Settings.tsx:427
+#: src/screens/Settings/Settings.tsx:446
+#: src/screens/Settings/Settings.tsx:448
 msgid "Reset onboarding state"
 msgstr ""
 
@@ -7504,7 +7511,7 @@ msgid "Sets email for password reset"
 msgstr ""
 
 #: src/Navigation.tsx:199
-#: src/screens/Settings/Settings.tsx:89
+#: src/screens/Settings/Settings.tsx:90
 #: src/view/shell/desktop/LeftNav.tsx:727
 #: src/view/shell/Drawer.tsx:572
 msgid "Settings"
@@ -7764,7 +7771,7 @@ msgstr ""
 msgid "Shows information about when this post was created"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:113
+#: src/screens/Settings/Settings.tsx:114
 msgid "Shows other accounts you can switch to"
 msgstr ""
 
@@ -7821,9 +7828,9 @@ msgstr ""
 msgid "Sign in to view post"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:250
-#: src/screens/Settings/Settings.tsx:252
-#: src/screens/Settings/Settings.tsx:284
+#: src/screens/Settings/Settings.tsx:271
+#: src/screens/Settings/Settings.tsx:273
+#: src/screens/Settings/Settings.tsx:305
 #: src/screens/SignupQueued.tsx:93
 #: src/screens/SignupQueued.tsx:96
 #: src/screens/Takendown.tsx:85
@@ -7837,7 +7844,7 @@ msgstr ""
 msgid "Sign Out"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:281
+#: src/screens/Settings/Settings.tsx:302
 #: src/view/shell/desktop/LeftNav.tsx:209
 msgid "Sign out?"
 msgstr ""
@@ -8040,12 +8047,12 @@ msgstr ""
 msgid "Step {0} of {1}"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:375
+#: src/screens/Settings/Settings.tsx:396
 msgid "Storage cleared, you need to restart the app now."
 msgstr ""
 
 #: src/Navigation.tsx:292
-#: src/screens/Settings/Settings.tsx:406
+#: src/screens/Settings/Settings.tsx:427
 msgid "Storybook"
 msgstr ""
 
@@ -8131,9 +8138,9 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:111
-#: src/screens/Settings/Settings.tsx:125
-#: src/screens/Settings/Settings.tsx:510
+#: src/screens/Settings/Settings.tsx:112
+#: src/screens/Settings/Settings.tsx:126
+#: src/screens/Settings/Settings.tsx:531
 #: src/view/shell/desktop/LeftNav.tsx:246
 msgid "Switch account"
 msgstr ""
@@ -8160,7 +8167,7 @@ msgstr ""
 
 #: src/screens/Settings/AboutSettings.tsx:107
 #: src/screens/Settings/AboutSettings.tsx:110
-#: src/screens/Settings/Settings.tsx:399
+#: src/screens/Settings/Settings.tsx:420
 msgid "System log"
 msgstr ""
 
@@ -8732,7 +8739,7 @@ msgstr ""
 msgid "This will delete \"{0}\" from your muted words. You can always add it back later."
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:562
+#: src/screens/Settings/Settings.tsx:583
 msgid "This will remove @{0} from the quick access list."
 msgstr ""
 
@@ -9049,8 +9056,8 @@ msgstr ""
 msgid "Unpinned from your feeds"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:432
-#: src/screens/Settings/Settings.tsx:434
+#: src/screens/Settings/Settings.tsx:453
+#: src/screens/Settings/Settings.tsx:455
 msgid "Unsnooze email reminder"
 msgstr ""
 
@@ -9277,17 +9284,17 @@ msgstr ""
 msgid "Value:"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:184
-#: src/screens/Settings/Settings.tsx:187
+#: src/screens/Settings/Settings.tsx:185
+#: src/screens/Settings/Settings.tsx:190
 msgid "Verifiable credentials"
 msgstr ""
 
 #: src/Navigation.tsx:593
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:91
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:273
 msgid "Verifiable Credentials"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:164
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:356
 msgid "Verifiable credentials allow you to prove your age or account ownership without revealing unnecessary personal information. Your data stays private and secure in your wallet."
 msgstr ""
 
@@ -9295,7 +9302,7 @@ msgstr ""
 msgid "Verification complete!"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:61
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:146
 msgid "Verification completed successfully!"
 msgstr ""
 
@@ -9321,7 +9328,7 @@ msgstr ""
 msgid "Verifications on Bluesky work differently than on other platforms. <0>Learn more here.</0>"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:73
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:163
 msgid "Verified"
 msgstr ""
 
@@ -9339,14 +9346,6 @@ msgstr ""
 #: src/view/com/profile/ProfileMenu.tsx:346
 #: src/view/com/profile/ProfileMenu.tsx:349
 msgid "Verify account"
-msgstr ""
-
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:150
-msgid "Verify Accounts"
-msgstr ""
-
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:119
-msgid "Verify Age"
 msgstr ""
 
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:348
@@ -9376,8 +9375,8 @@ msgstr ""
 msgid "Verify this account?"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:115
-msgid "Verify your age"
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:254
+msgid "Verify your {0}"
 msgstr ""
 
 #: src/components/dialogs/VerifiableCredentialsDialog/index.tsx:41
@@ -9388,10 +9387,6 @@ msgstr ""
 #: src/screens/Settings/AccountSettings.tsx:78
 #: src/screens/Settings/AccountSettings.tsx:98
 msgid "Verify your email"
-msgstr ""
-
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:146
-msgid "Verify your social media accounts"
 msgstr ""
 
 #: src/screens/Settings/AboutSettings.tsx:126
@@ -9730,6 +9725,10 @@ msgstr ""
 
 #: src/screens/Profile/Header/ProfileHeaderLabeler.tsx:343
 msgid "We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty."
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:337
+msgid "We're working on adding more verification options to help you build trust and credibility."
 msgstr ""
 
 #: src/screens/Deactivated.tsx:125
@@ -10146,7 +10145,7 @@ msgstr ""
 msgid "You previously deactivated @{0}."
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:386
+#: src/screens/Settings/Settings.tsx:407
 msgid "You probably want to restart the app now."
 msgstr ""
 
@@ -10158,7 +10157,7 @@ msgstr ""
 msgid "You reacted {0} to {1}"
 msgstr ""
 
-#: src/screens/Settings/Settings.tsx:282
+#: src/screens/Settings/Settings.tsx:303
 #: src/view/shell/desktop/LeftNav.tsx:210
 msgid "You will be signed out of all your accounts."
 msgstr ""

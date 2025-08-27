@@ -43,7 +43,7 @@ export interface CredentialData {
 
 // Individual verification configurations
 const AGE_VERIFICATION_CONFIG: VerificationConfig = {
-  assertion: 'I assert that I am over 21 years of age',
+  assertion: 'I assert that I am over 18 years of age',
   types: ['VerifiableCredential', 'AnonCred', 'AgeVerification'],
   purposes: ['ProofOfMajorityAge'],
 }

@@ -117,7 +117,7 @@ describe('VerificationRecord API', () => {
           handle: 'test.user.bsky.social',
           displayName: 'Test User',
           subject: 'did:plc:test123',
-          assertion: expect.stringContaining('21 years of age'),
+          assertion: expect.stringContaining('18 years of age'),
           createdAt: expect.any(String),
           credential: expect.objectContaining({
             type: ['VerifiableCredential', 'AnonCred', 'AgeVerification'],
@@ -258,7 +258,7 @@ describe('VerificationRecord API', () => {
             handle: 'test.user.bsky.social',
             displayName: 'Test User',
             subject: 'did:plc:test123',
-            assertion: 'I assert that I am over 21 years of age',
+            assertion: 'I assert that I am over 18 years of age',
             createdAt: '2024-01-15T10:30:00Z',
             credential: {
               type: ['VerifiableCredential', 'AgeVerification'],

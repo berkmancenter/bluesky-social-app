@@ -18,7 +18,7 @@ describe('VerificationProcessor', () => {
           handle: 'alice.bsky.social',
           displayName: 'Alice Johnson',
           subject: 'did:plc:alice123',
-          assertion: 'I assert that I am over 21 years of age',
+          assertion: 'I assert that I am over 18 years of age',
           createdAt: '2024-01-15T10:30:00Z',
           credential: {
             uri: 'https://verifier.example.com/proof/age123',
@@ -73,7 +73,7 @@ describe('VerificationProcessor', () => {
           handle: 'bob.bsky.social',
           displayName: 'Bob Smith',
           subject: 'did:plc:bob123',
-          assertion: 'I assert that I am over 21 years of age',
+          assertion: 'I assert that I am over 18 years of age',
           createdAt: '2024-01-10T08:00:00Z', // Older
           credential: {
             uri: 'https://verifier.example.com/proof/age1',
@@ -89,7 +89,7 @@ describe('VerificationProcessor', () => {
           handle: 'bob.bsky.social',
           displayName: 'Bob Smith',
           subject: 'did:plc:bob123',
-          assertion: 'I assert that I am over 21 years of age',
+          assertion: 'I assert that I am over 18 years of age',
           createdAt: '2024-01-20T10:00:00Z', // Newer
           credential: {
             uri: 'https://verifier.example.com/proof/age2',
@@ -170,7 +170,7 @@ describe('VerificationProcessor', () => {
           handle: 'valid.bsky.social',
           displayName: 'Valid User',
           subject: 'did:plc:valid123',
-          assertion: 'I assert that I am over 21 years of age',
+          assertion: 'I assert that I am over 18 years of age',
           createdAt: '2024-01-15T12:00:00Z',
           credential: {
             uri: 'https://verifier.example.com/proof/valid123',
@@ -186,7 +186,7 @@ describe('VerificationProcessor', () => {
           handle: 'invalid.bsky.social',
           displayName: 'Invalid User',
           subject: 'did:plc:invalid123',
-          assertion: 'I assert that I am over 21 years of age',
+          assertion: 'I assert that I am over 18 years of age',
           createdAt: '2024-01-15T12:00:00Z',
           credential: {
             uri: 'https://verifier.example.com/proof/invalid123',
@@ -379,7 +379,7 @@ describe('VerificationProcessor', () => {
         handle: 'test.bsky.social',
         displayName: 'Test User',
         subject: 'did:plc:test123',
-        assertion: 'I assert that I am over 21 years of age',
+        assertion: 'I assert that I am over 18 years of age',
         createdAt: '2024-01-15T10:30:00Z',
         credential: {
           uri: 'https://verifier.example.com/proof/test123',
@@ -432,7 +432,7 @@ describe('VerificationProcessor', () => {
         handle: 'test.bsky.social',
         displayName: 'Test User',
         subject: 'did:plc:test123',
-        assertion: 'I assert that I am over 21 years of age',
+        assertion: 'I assert that I am over 18 years of age',
         createdAt: 'invalid-date',
         credential: {
           uri: 'https://verifier.example.com/proof/test123',

@@ -16,16 +16,16 @@ export class CredentialsAPI {
   }
 
   async requestAgeProof(connectionId: string, credentialDefinitionId: string) {
-    // Calculate 21+ age threshold
+    // Calculate 18+ age threshold
     const year = new Date().getFullYear()
-    const twentyOneYearsAgo = new Date()
-    twentyOneYearsAgo.setFullYear(year - 21)
+    const eighteenYearsAgo = new Date()
+    eighteenYearsAgo.setFullYear(year - 18)
 
     // Calculate threshold in YYYYMMDD format
-    const twentyOneThreshold = parseInt(
-      twentyOneYearsAgo.getFullYear() +
-        String(twentyOneYearsAgo.getMonth() + 1).padStart(2, '0') +
-        String(twentyOneYearsAgo.getDate()).padStart(2, '0'),
+    const eighteenThreshold = parseInt(
+      eighteenYearsAgo.getFullYear() +
+        String(eighteenYearsAgo.getMonth() + 1).padStart(2, '0') +
+        String(eighteenYearsAgo.getDate()).padStart(2, '0'),
       10,
     )
 
@@ -61,7 +61,7 @@ export class CredentialsAPI {
             age_verification: {
               name: 'date_of_birth',
               p_type: '<=',
-              p_value: twentyOneThreshold,
+              p_value: eighteenThreshold,
               restrictions: [
                 {
                   cred_def_id: credentialDefinitionId,

@@ -70,7 +70,7 @@ function Inner({
           {ageStatus.verified ? (
             <Trans>
               This account has an age verification badge because it has been
-              verified to be over 21 years of age through a trusted verification
+              verified to be over 18 years of age through a trusted verification
               process.
             </Trans>
           ) : (

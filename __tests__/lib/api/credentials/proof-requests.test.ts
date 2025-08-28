@@ -48,7 +48,7 @@ describe('ProofRequestsAPI', () => {
               age_verification: {
                 name: 'date_of_birth',
                 p_type: '<=',
-                p_value: 20030101,
+                p_value: 20060101,
                 restrictions: [
                   {
                     cred_def_id: 'test-cred-def-123',

@@ -8518,7 +8518,7 @@ msgid "This account has an account verification badge because the account holder
 msgstr ""
 
 #: src/components/verification/AgeVerificationDialog.tsx:71
-msgid "This account has an age verification badge because it has been verified to be over 21 years of age through a trusted verification process."
+msgid "This account has an age verification badge because it has been verified to be over 18 years of age through a trusted verification process."
 msgstr ""
 
 #: src/components/verification/VerificationsDialog.tsx:92

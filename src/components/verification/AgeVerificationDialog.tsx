@@ -123,7 +123,7 @@ function Inner({
             label={_(msg`View verification details on verifier service`)}
             size="small"
             variant="outline"
-            color="primary"
+            color="secondary"
             onPress={() => {
               const verifierUrl = ageStatus.record.credential.uri
               if (verifierUrl) {
@@ -139,7 +139,7 @@ function Inner({
           label={_(msg`Close dialog`)}
           size="small"
           variant="solid"
-          color="primary"
+          color="secondary"
           onPress={() => {
             control.close()
           }}>

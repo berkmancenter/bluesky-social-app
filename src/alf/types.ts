@@ -1,4 +1,4 @@
-import {StyleProp, TextStyle, ViewStyle} from 'react-native'
+import {type StyleProp, type TextStyle, type ViewStyle} from 'react-native'
 
 export type TextStyleProp = {
   style?: StyleProp<TextStyle>
@@ -13,6 +13,8 @@ export type Palette = {
   white: string
   black: string
   like: string
+  customBlack: string
+  mint: string
 
   contrast_25: string
   contrast_50: string

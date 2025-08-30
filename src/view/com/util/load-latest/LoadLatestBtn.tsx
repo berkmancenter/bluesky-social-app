@@ -82,7 +82,9 @@ export function LoadLatestBtn({
           a.justify_center,
           a.border,
           t.atoms.border_contrast_low,
-          showIndicator ? {backgroundColor: t.palette.primary_50} : t.atoms.bg,
+          showIndicator
+            ? {backgroundColor: t.palette.contrast_100}
+            : t.atoms.bg,
         ]}
         onPress={onPress}
         hitSlop={HITSLOP_20}
@@ -97,7 +99,7 @@ export function LoadLatestBtn({
           style={[
             a.z_10,
             showIndicator
-              ? {color: t.palette.primary_500}
+              ? {color: t.palette.contrast_900}
               : t.atoms.text_contrast_medium,
           ]}
         />

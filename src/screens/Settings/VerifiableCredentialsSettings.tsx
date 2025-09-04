@@ -19,18 +19,28 @@
  *    - Add credential definition IDs
  *    - Update proof request templates
  */
+import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {type NativeStackScreenProps} from '@react-navigation/native-stack'
+import {useQueryClient} from '@tanstack/react-query'
 
+import {deleteVerificationRecord} from '#/lib/api/credentials/verification-record'
 import {type VerificationType} from '#/lib/api/credentials/verification-types'
 import {type CommonNavigatorParams} from '#/lib/routes/types'
 import {logger} from '#/logger'
+import {PROFILE_VERIFICATION_RECORDS_QUERY_KEY} from '#/state/queries/credentials/useProfileVerificationStatus'
+import {
+  useInvalidateVerificationRecords,
+  useVerificationRecordsQuery,
+} from '#/state/queries/credentials/useVerificationRecordsQuery'
 import {useVerificationStatus} from '#/state/queries/credentials/useVerificationStatus'
+import {useAgent, useSession} from '#/state/session'
 import * as Toast from '#/view/com/util/Toast'
 import * as SettingsList from '#/screens/Settings/components/SettingsList'
 import {atoms as a, useTheme} from '#/alf'
+import {Button} from '#/components/Button'
 import {
   useVerifiableCredentialsDialogControl,
   VerifiableCredentialsDialogScreenID,
@@ -41,6 +51,7 @@ import {Shield_Stroke2_Corner0_Rounded as ShieldIcon} from '#/components/icons/S
 import {VerifiedCheck} from '#/components/icons/VerifiedCheck'
 import {Warning_Stroke2_Corner0_Rounded as WarningIcon} from '#/components/icons/Warning'
 import * as Layout from '#/components/Layout'
+import * as Prompt from '#/components/Prompt'
 import {Text} from '#/components/Typography'
 
 type Props = NativeStackScreenProps<
@@ -109,9 +120,19 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
   const t = useTheme()
   const verifiableCredentialsDialogControl =
     useVerifiableCredentialsDialogControl()
+  const deleteConfirmationDialogControl = Prompt.usePromptControl()
+  const [verificationToDelete, setVerificationToDelete] =
+    React.useState<VerificationType | null>(null)
 
   // Persistent state from PDS
   const {status: credentialStatus, isLoading, actions} = useVerificationStatus()
+
+  // Get verification records for delete functionality
+  const {data: verificationRecords = []} = useVerificationRecordsQuery()
+  const invalidateVerificationRecords = useInvalidateVerificationRecords()
+  const agent = useAgent()
+  const {currentAccount} = useSession()
+  const queryClient = useQueryClient()
 
   // Ensure we work with implemented verification types (e.g. age, account)
   const isRealVerificationType = (id: string): id is VerificationType => {
@@ -147,6 +168,72 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
     logger.info('VerifiableCredentialsSettings: Verification completed', {
       credentialType: type,
     })
+  }
+
+  const handleDeleteVerification = (type: VerificationType) => {
+    setVerificationToDelete(type)
+    deleteConfirmationDialogControl.open()
+  }
+
+  const confirmDeleteVerification = async () => {
+    if (!verificationToDelete) return
+
+    try {
+      // Find the verification record for this type
+      const recordToDelete = verificationRecords.find(record => {
+        const credentialTypes = record.credential?.type || []
+        return credentialTypes.some(
+          credType =>
+            (verificationToDelete === 'age' &&
+              credType.includes('AgeVerification')) ||
+            (verificationToDelete === 'account' &&
+              credType.includes('AccountVerification')),
+        )
+      })
+
+      if (!recordToDelete?.rkey) {
+        Toast.show(_(msg`No verification record found to delete.`))
+        return
+      }
+
+      // Delete the verification record
+      await deleteVerificationRecord(recordToDelete.rkey, {
+        currentAccount,
+        agent,
+      })
+
+      // Immediately invalidate all verification caches to remove the record from the UI
+      invalidateVerificationRecords()
+      actions.refreshFromPDS()
+
+      // Also invalidate profile verification cache so badges update immediately
+      if (currentAccount?.did) {
+        queryClient.invalidateQueries({
+          queryKey: [
+            ...PROFILE_VERIFICATION_RECORDS_QUERY_KEY,
+            currentAccount.did,
+          ],
+        })
+      }
+
+      Toast.show(_(msg`Verification deleted successfully!`))
+      logger.info('VerifiableCredentialsSettings: Verification deleted', {
+        credentialType: verificationToDelete,
+        rkey: recordToDelete.rkey,
+      })
+    } catch (error) {
+      logger.error(
+        'VerifiableCredentialsSettings: Failed to delete verification',
+        {
+          error,
+          credentialType: verificationToDelete,
+        },
+      )
+      Toast.show(_(msg`Failed to delete verification. Please try again.`))
+    } finally {
+      setVerificationToDelete(null)
+      deleteConfirmationDialogControl.close()
+    }
   }
 
   const getCredentialStatusText = (type: string) => {
@@ -249,16 +336,35 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
 
         {/* Card Action */}
         {!isComingSoon && (
-          <SettingsList.PressableItem
-            onPress={() => handleVerifyCredential(card.id as VerificationType)}
-            label={_(msg`Verify your ${card.title.toLowerCase()}`)}
-            disabled={isVerified}
-            style={[a.mt_xs]}>
-            <SettingsList.ItemText>
-              <Text>{card.actionLabel || `Verify ${card.title}`}</Text>
-            </SettingsList.ItemText>
-            <SettingsList.Chevron />
-          </SettingsList.PressableItem>
+          <>
+            {isVerified ? (
+              <View style={[a.mt_sm, a.flex_row, a.justify_end]}>
+                <Button
+                  onPress={() =>
+                    handleDeleteVerification(card.id as VerificationType)
+                  }
+                  label={_(msg`Remove`)}
+                  color="secondary"
+                  variant="outline"
+                  size="small"
+                  style={[a.self_end]}>
+                  <Text>{_(msg`Remove`)}</Text>
+                </Button>
+              </View>
+            ) : (
+              <SettingsList.PressableItem
+                onPress={() =>
+                  handleVerifyCredential(card.id as VerificationType)
+                }
+                label={_(msg`Verify your ${card.title.toLowerCase()}`)}
+                style={[a.mt_xs]}>
+                <SettingsList.ItemText>
+                  <Text>{card.actionLabel || `Verify ${card.title}`}</Text>
+                </SettingsList.ItemText>
+                <SettingsList.Chevron />
+              </SettingsList.PressableItem>
+            )}
+          </>
         )}
       </View>
     )
@@ -362,6 +468,28 @@ export function VerifiableCredentialsSettingsScreen({}: Props) {
           </View>
         </View>
       </Layout.Content>
+
+      {/* Delete Confirmation Dialog */}
+      <Prompt.Outer control={deleteConfirmationDialogControl}>
+        <Prompt.TitleText>
+          <Trans>Delete Verification</Trans>
+        </Prompt.TitleText>
+        <Prompt.DescriptionText>
+          <Trans>
+            Are you sure you want to delete your{' '}
+            {verificationToDelete === 'age' ? 'age' : 'account'} verification?
+            This action cannot be undone.
+          </Trans>
+        </Prompt.DescriptionText>
+        <Prompt.Actions>
+          <Prompt.Cancel />
+          <Prompt.Action
+            onPress={confirmDeleteVerification}
+            cta={_(msg`Delete`)}
+            color="negative"
+          />
+        </Prompt.Actions>
+      </Prompt.Outer>
     </Layout.Screen>
   )
 }

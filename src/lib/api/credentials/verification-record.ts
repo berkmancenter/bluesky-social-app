@@ -426,6 +426,47 @@ export async function getVerificationRecord(
 }
 
 /**
+ * Delete a verification record by rkey
+ */
+export async function deleteVerificationRecord(
+  rkey: string,
+  sessionData?: {
+    currentAccount: any
+    agent: any
+  },
+): Promise<void> {
+  if (!sessionData) {
+    throw new Error('Session data required for deleting verification records')
+  }
+
+  const {currentAccount, agent} = sessionData
+
+  if (!currentAccount?.did) {
+    throw new Error('No authenticated user found')
+  }
+
+  try {
+    await agent.api.com.atproto.repo.deleteRecord({
+      repo: currentAccount.did,
+      collection: 'app.bsky.graph.verification',
+      rkey: rkey,
+    })
+
+    logger.info('Verification record deleted successfully', {
+      rkey,
+      userDid: currentAccount.did,
+    })
+  } catch (error) {
+    logger.error('Failed to delete verification record', {
+      error,
+      rkey,
+      userDid: currentAccount.did,
+    })
+    throw new Error(`Failed to delete verification record: ${error}`)
+  }
+}
+
+/**
  * List all verification records for a user
  */
 export async function listVerificationRecords(

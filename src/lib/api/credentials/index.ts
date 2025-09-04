@@ -88,8 +88,8 @@ export class CredentialsAPI {
       },
       presentation_request: {
         anoncreds: {
-          name: 'X Account Verification',
-          version: '1.0',
+          name: 'account_verification',
+          version: '1.1',
           requested_attributes: {
             screen_name: {
               name: 'screen_name',
@@ -107,8 +107,16 @@ export class CredentialsAPI {
                 },
               ],
             },
-            host: {
-              name: 'host',
+            proof_id: {
+              name: 'proof_id',
+              restrictions: [
+                {
+                  cred_def_id: credentialDefinitionId,
+                },
+              ],
+            },
+            notarization: {
+              name: 'notarization',
               restrictions: [
                 {
                   cred_def_id: credentialDefinitionId,

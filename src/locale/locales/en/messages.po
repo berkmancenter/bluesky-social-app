@@ -1123,6 +1123,10 @@ msgstr ""
 msgid "Are you sure you want to delete this starter pack?"
 msgstr ""
 
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:478
+msgid "Are you sure you want to delete your {0} verification? This action cannot be undone."
+msgstr ""
+
 #: src/screens/Profile/Header/EditProfileDialog.tsx:86
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
@@ -1187,7 +1191,7 @@ msgstr ""
 msgid "Autoplay videos and GIFs"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:318
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:424
 msgid "Available Verifications"
 msgstr ""
 
@@ -1906,7 +1910,7 @@ msgstr ""
 msgid "Comics"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:334
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:440
 msgid "Coming Soon"
 msgstr ""
 
@@ -2367,6 +2371,7 @@ msgstr ""
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:701
 #: src/screens/Messages/components/ChatStatusInfo.tsx:55
 #: src/screens/Settings/AppPasswords.tsx:212
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:488
 #: src/screens/StarterPack/StarterPackScreen.tsx:599
 #: src/screens/StarterPack/StarterPackScreen.tsx:688
 #: src/screens/StarterPack/StarterPackScreen.tsx:760
@@ -2452,6 +2457,10 @@ msgstr ""
 
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:696
 msgid "Delete this post?"
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:475
+msgid "Delete Verification"
 msgstr ""
 
 #: src/components/Post/Embed/index.tsx:173
@@ -3281,6 +3290,10 @@ msgstr ""
 msgid "Failed to delete starter pack"
 msgstr ""
 
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:232
+msgid "Failed to delete verification. Please try again."
+msgstr ""
+
 #: src/components/dialogs/VerifiableCredentialsDialog/screens/Verify.tsx:112
 msgid "Failed to generate connection invitation, please try again."
 msgstr ""
@@ -3378,7 +3391,7 @@ msgstr ""
 msgid "Failed to send proof request, please try again."
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:138
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:159
 msgid "Failed to start verification. Please try again."
 msgstr ""
 
@@ -4749,7 +4762,7 @@ msgstr ""
 msgid "Load new posts"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:154
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:241
 #: src/view/com/composer/text-input/mobile/Autocomplete.tsx:61
 msgid "Loading..."
 msgstr ""
@@ -5443,6 +5456,10 @@ msgstr ""
 msgid "No thanks"
 msgstr ""
 
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:195
+msgid "No verification record found to delete."
+msgstr ""
+
 #: src/components/dialogs/PostInteractionSettingsDialog.tsx:409
 msgid "Nobody"
 msgstr ""
@@ -5481,8 +5498,8 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:158
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:165
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:245
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:252
 msgid "Not verified"
 msgstr ""
 
@@ -6583,6 +6600,8 @@ msgstr ""
 #: src/components/StarterPack/Wizard/WizardListCard.tsx:102
 #: src/components/StarterPack/Wizard/WizardListCard.tsx:109
 #: src/screens/Settings/Settings.tsx:589
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:346
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:351
 #: src/view/com/feeds/FeedSourceCard.tsx:322
 #: src/view/com/modals/UserAddRemoveLists.tsx:235
 #: src/view/com/posts/PostFeedErrorMessage.tsx:217
@@ -9290,11 +9309,11 @@ msgid "Verifiable credentials"
 msgstr ""
 
 #: src/Navigation.tsx:593
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:273
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:379
 msgid "Verifiable Credentials"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:356
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:462
 msgid "Verifiable credentials allow you to prove your age or account ownership without revealing unnecessary personal information. Your data stays private and secure in your wallet."
 msgstr ""
 
@@ -9302,8 +9321,12 @@ msgstr ""
 msgid "Verification complete!"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:146
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:167
 msgid "Verification completed successfully!"
+msgstr ""
+
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:219
+msgid "Verification deleted successfully!"
 msgstr ""
 
 #: src/components/verification/AccountVerificationDialog.tsx:86
@@ -9328,7 +9351,7 @@ msgstr ""
 msgid "Verifications on Bluesky work differently than on other platforms. <0>Learn more here.</0>"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:163
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:250
 msgid "Verified"
 msgstr ""
 
@@ -9375,7 +9398,7 @@ msgstr ""
 msgid "Verify this account?"
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:254
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:359
 msgid "Verify your {0}"
 msgstr ""
 
@@ -9727,7 +9750,7 @@ msgstr ""
 msgid "We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty."
 msgstr ""
 
-#: src/screens/Settings/VerifiableCredentialsSettings.tsx:337
+#: src/screens/Settings/VerifiableCredentialsSettings.tsx:443
 msgid "We're working on adding more verification options to help you build trust and credibility."
 msgstr ""
 
